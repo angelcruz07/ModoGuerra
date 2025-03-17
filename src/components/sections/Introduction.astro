@@ -1,0 +1,20 @@
+---
+import Section from "../Section.astro"
+import { Image } from 'astro:assets';
+---
+
+<Section className="flex items-center flex-col justify-center">
+    <h1 class="font-semibold md:text-4xl text-center mb-5">Modo Guerra <span class="text-gradient">Próximamente mi compa....</span></h1>
+    <Image src="/overview.png" class="rounded-2xl" alt="Vista previa de la aplicación de modo guerra" width={500} height={500}>
+</Section>
+
+
+<style>
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+</style>

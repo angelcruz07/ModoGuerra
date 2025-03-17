@@ -1,10 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Introduction from '../components/sections/Introduction.astro';
+import About from '../components/sections/About.astro'
 ---
 
-<Layout title="Modo Guerra">
-	<main>
-    <h1>Modo Guerra <span class="text-gradient">Próximamente mi compa....</span></h1>
+<Layout title="Modo Guerra - Próximamente">
+  <main class="flex flex-col">
+    <Introduction />
+    <About/>
+
+    <div class="mt-5">
+      <p class="text-xs">Si deseas colaborar y formar parte del equipo comunicate con alguno de los mantenedores</p>
+      <p class="text-xs">angelcruzsachez126<span class="text-mayus">@gmail.com</span></p>
+    </div>
+  </main>
 </Layout>
 
 <style>
@@ -20,15 +29,7 @@ import Layout from '../layouts/Layout.astro';
 		font-size: 20px;
 		line-height: 1.6;
 	}
-	.astro-a {
-		position: absolute;
-		top: -32px;
-		left: 50%;
-		transform: translatex(-50%);
-		width: 220px;
-		height: auto;
-		z-index: -1;
-	}
+
 	h1 {
 		font-size: 4rem;
 		font-weight: 700;
@@ -36,11 +37,5 @@ import Layout from '../layouts/Layout.astro';
 		text-align: center;
 		margin-bottom: 1em;
 	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
+
 </style>
