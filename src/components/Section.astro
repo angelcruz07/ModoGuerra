@@ -1,10 +1,11 @@
 ---
 interface Props {
-  className?: string
+  className?: string;
 }
 
-const { className }: Props = Astro.props
+const { className }: Props = Astro.props;
 ---
+
 <section class={`lg:w-[800px] mx-auto w-full ${className}`}>
-  <slot/>
+  <slot />
 </section>

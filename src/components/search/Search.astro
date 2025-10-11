@@ -1,50 +1,50 @@
 ---
 // Search.astro
-const searchParams = Astro.url.searchParams
-const currentSearch = searchParams.get('search') || ''
+const searchParams = Astro.url.searchParams;
+const currentSearch = searchParams.get("search") || "";
 ---
 
-<nav class='border-accent-hover mt- w-full rounded-md border'>
-  <form method='GET' action='' class='w-full'>
+<nav class="border-accent-hover mt- w-full rounded-md border">
+  <form method="GET" action="" class="w-full">
     <input
-      type='text'
-      name='search'
+      type="text"
+      name="search"
       value={currentSearch}
-      placeholder='Buscar...'
-      class='bg-accent/80 w-full rounded-md p-3 text-white placeholder-gray-400 focus:outline-none'
+      placeholder="Buscar..."
+      class="w-full rounded-md p-3 text-white placeholder-gray-400 focus:outline-none"
     />
 
     <!-- Mantener otros parámetros de URL -->
-    {searchParams.get('page') && <input type='hidden' name='page' value='1' />}
+    {searchParams.get("page") && <input type="hidden" name="page" value="1" />}
     {
-      searchParams.get('category') && (
+      searchParams.get("category") && (
         <input
-          type='hidden'
-          name='category'
-          value={searchParams.get('category')}
+          type="hidden"
+          name="category"
+          value={searchParams.get("category")}
         />
       )
     }
     {
       searchParams
-        .getAll('tags')
-        .map((tag) => <input type='hidden' name='tags' value={tag} />)
+        .getAll("tags")
+        .map((tag) => <input type="hidden" name="tags" value={tag} />)
     }
   </form>
 </nav>
 
 <script>
   const searchInput = document.querySelector(
-    'input[name="search"]'
-  ) as HTMLInputElement
-  const form = document.querySelector('form') as HTMLFormElement
+    'input[name="search"]',
+  ) as HTMLInputElement;
+  const form = document.querySelector("form") as HTMLFormElement;
 
-  let timeout: NodeJS.Timeout
+  let timeout: NodeJS.Timeout;
 
-  searchInput.addEventListener('input', () => {
-    clearTimeout(timeout)
+  searchInput.addEventListener("input", () => {
+    clearTimeout(timeout);
     timeout = setTimeout(() => {
-      form.submit()
-    }, 500) // Buscar después de 500ms de inactividad
-  })
+      form.submit();
+    }, 500); // Buscar después de 500ms de inactividad
+  });
 </script>

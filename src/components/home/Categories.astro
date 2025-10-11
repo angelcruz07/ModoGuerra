@@ -33,20 +33,20 @@ const categoriasUnicas = todasLasCategorias.filter(
       categoriasUnicas.map((categoria) => (
         <a
           href={`/blog/?&category=${categoria.id}`}
-          class="group relative overflow-hidden rounded-xl border border-purple-400/40 bg-gradient-to-br from-slate-800/60 to-purple-900/40 p-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-purple-400/60 hover:bg-gradient-to-br hover:from-slate-700/70 hover:to-purple-800/50 hover:shadow-xl hover:shadow-purple-400/30"
+          class="group relative overflow-hidden rounded-xl border border-red-400/40 bg-gradient-to-br from-slate-800/60 to-red-900/40 p-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-red-400/60 hover:bg-gradient-to-br hover:from-slate-700/70 hover:to-red-800/50 hover:shadow-xl hover:shadow-red-400/30"
         >
           <div class="flex h-full flex-col items-center justify-center text-center">
             {/* Nombre de la categoría */}
-            <h3 class="mb-3 text-lg font-semibold text-gray-100 transition-colors duration-300 group-hover:text-purple-300">
+            <h3 class="mb-3 text-lg font-semibold text-gray-100 transition-colors duration-300 group-hover:text-red-300">
               {categoria.name}
             </h3>
 
             {/* Línea decorativa */}
-            <div class="h-1 w-8 rounded-full bg-gradient-to-r from-purple-400 to-purple-300 transition-all duration-300 group-hover:w-12 group-hover:from-purple-300 group-hover:to-purple-200" />
+            <div class="h-1 w-8 rounded-full bg-gradient-to-r from-red-400 to-red-300 transition-all duration-300 group-hover:w-12 group-hover:from-red-300 group-hover:to-red-200" />
           </div>
 
           {/* Efecto de resplandor al hover */}
-          <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500/0 to-purple-400/0 opacity-0 transition-opacity duration-300 group-hover:from-purple-500/20 group-hover:to-purple-400/20 group-hover:opacity-20" />
+          <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-red-500/0 to-red-400/0 opacity-0 transition-opacity duration-300 group-hover:from-red-500/20 group-hover:to-red-400/20 group-hover:opacity-20" />
         </a>
       ))
     }

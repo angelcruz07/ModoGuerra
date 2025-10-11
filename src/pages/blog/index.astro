@@ -1,44 +1,44 @@
 ---
-import { actions } from 'astro:actions'
-import Layout from '@layouts/Layout.astro'
-import Heading from '@components/heading/Heading.astro'
-import Text from '@components/text/Text.astro'
-import GridPost from '@components/post/gridpost/GridPost.astro'
-import Search from '@components/search/Search.astro'
-import Pagination from '@components/shared/Pagination.astro'
-import Filter from '@components/filter/Filter.astro'
+import { actions } from "astro:actions";
+import Layout from "@layouts/Layout.astro";
+import Heading from "@components/heading/Heading.astro";
+import Text from "@components/text/Text.astro";
+import GridPost from "@components/post/gridpost/GridPost.astro";
+import Search from "@components/search/Search.astro";
+import Pagination from "@components/shared/Pagination.astro";
+import Filter from "@components/filter/Filter.astro";
 
-const searchParams = Astro.url.searchParams
-const pageParam = Number(searchParams.get('page') ?? 1)
-const categoryParam = searchParams.get('category') || undefined
-const tagsParam = searchParams.getAll('tags').filter(Boolean)
-const searchParam = searchParams.get('search') || undefined
+const searchParams = Astro.url.searchParams;
+const pageParam = Number(searchParams.get("page") ?? 1);
+const categoryParam = searchParams.get("category") || undefined;
+const tagsParam = searchParams.getAll("tags").filter(Boolean);
+const searchParam = searchParams.get("search") || undefined;
 
 const { data } = await Astro.callAction(actions.post.getPostsByPage, {
   page: pageParam,
   category: categoryParam,
   tags: tagsParam.length > 0 ? tagsParam : undefined,
   search: searchParam,
-})
+});
 
 if (!data) {
-  return Astro.redirect('/500')
+  return Astro.redirect("/500");
 }
 
-const { totalPages, posts } = data
+const { totalPages, posts } = data;
 ---
 
-<Layout title='Blog'>
-  <section class='py-20'>
-    <div class='space-y-5 text-center'>
-      <Heading component='h1' fontSize='large'>Todos los post</Heading>
-      <Text>Bienvenido al blog de Devtalles community</Text>
-      <hr class='border-accent mx-auto w-20 border-2' />
+<Layout title="Blog">
+  <section class="py-20">
+    <div class="space-y-5 text-center">
+      <Heading component="h1" fontSize="large">Todos los post</Heading>
+      <Text>El éxito viene cuando el trabajo y la oportunidad se juntan</Text>
+      <hr class="border-accent mx-auto w-20 border-2" />
     </div>
 
     <!-- Barra de búsqueda -->
     <div
-      class='mx-auto mt-10 flex flex-col items-center justify-center gap-4 md:flex-row'
+      class="mx-auto mt-10 flex flex-col items-center justify-center gap-4 md:flex-row"
     >
       <Search />
       <Filter />

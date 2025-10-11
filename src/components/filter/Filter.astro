@@ -1,30 +1,30 @@
 ---
-import { actions } from 'astro:actions'
-import DeleteFilter from '../../icons/blog/trash.svg'
+import { actions } from "astro:actions";
+import DeleteFilter from "../../icons/blog/trash.svg";
 
-const searchParams = Astro.url.searchParams
-const currentCategory = searchParams.get('category') || ''
-const currentTags = searchParams.getAll('tags') || []
+const searchParams = Astro.url.searchParams;
+const currentCategory = searchParams.get("category") || "";
+const currentTags = searchParams.getAll("tags") || [];
 
 const { data: categories } = await Astro.callAction(
   actions.post.getCategories,
-  {}
-)
-const { data: tags } = await Astro.callAction(actions.post.getTags, {})
+  {},
+);
+const { data: tags } = await Astro.callAction(actions.post.getTags, {});
 
 if (!categories || !tags) {
-  console.error('Error loading filter data')
+  console.error("Error loading filter data");
 }
 ---
 
-<div class='flex flex-col-reverse gap-4 md:flex-row'>
-  <div class='min-w-56 flex-1'>
+<div class="flex flex-col-reverse gap-4 md:flex-row">
+  <div class="min-w-56 flex-1">
     <select
-      id='category'
-      name='category'
-      class='bg-accent/80 border-accent-hover focus:border-accent w-full appearance-none rounded-md border p-3 text-center text-sm text-white focus:outline-none'
+      id="category"
+      name="category"
+      class="border-accent-hover focus:border-accent w-full appearance-none rounded-md border p-3 text-center text-sm text-white focus:outline-none"
     >
-      <option value=''>Todas las categorías</option>
+      <option value="">Todas las categorías</option>
       {
         categories &&
           categories.map((category) => (
@@ -39,32 +39,32 @@ if (!categories || !tags) {
     </select>
   </div>
 
-  <div class='min-w-48 flex-1'>
-    <div class='relative'>
+  <div class="min-w-48 flex-1">
+    <div class="relative">
       <div
-        id='tagsDropdown'
-        class='bg-accent/80 border-accent-hover focus:border-accent hover:bg-accent/90 flex min-h-[48px] w-full cursor-pointer items-center justify-between rounded-md border p-3 text-white transition-colors'
+        id="tagsDropdown"
+        class="border-accent-hover focus:border-accent hover:bg-accent/90 flex min-h-[48px] w-full cursor-pointer items-center justify-between rounded-md border p-3 text-white transition-colors"
       >
-        <span id='tagsDisplay' class='flex-1 text-center text-sm text-white'>
+        <span id="tagsDisplay" class="flex-1 text-center text-sm text-white">
           Seleccionar tags...
         </span>
       </div>
 
       <div
-        id='tagsOptions'
-        class='bg-accent/95 border-accent-hover absolute top-full right-0 left-0 z-50 mt-1 hidden max-h-60 overflow-y-auto rounded-md border shadow-lg backdrop-blur-sm'
+        id="tagsOptions"
+        class="bg-accent/95 border-accent-hover absolute top-full right-0 left-0 z-50 mt-1 hidden max-h-60 overflow-y-auto rounded-md border shadow-lg backdrop-blur-sm"
       >
         {
           tags &&
             tags.map((tag) => (
-              <label class='flex cursor-pointer items-center px-3 py-2 text-white transition-colors hover:bg-white/10'>
+              <label class="flex cursor-pointer items-center px-3 py-2 text-white transition-colors hover:bg-white/10">
                 <input
-                  type='checkbox'
+                  type="checkbox"
                   value={tag}
-                  class='tag-checkbox mr-2 rounded accent-blue-500'
+                  class="tag-checkbox mr-2 rounded accent-blue-500"
                   checked={currentTags.includes(tag)}
                 />
-                <span class='text-sm'>{tag}</span>
+                <span class="text-sm">{tag}</span>
               </label>
             ))
         }
@@ -72,122 +72,122 @@ if (!categories || !tags) {
     </div>
   </div>
 
-  <div class='flex items-end'>
+  <div class="flex items-end">
     <button
-      type='button'
-      id='clearFilters'
-      class='bg-accent/80 border-accent-hover focus:border-accent flex h-12 w-full items-center justify-center rounded-md border text-white transition-colors hover:border-red-400 hover:bg-red-500 focus:outline-none md:w-12'
-      title='Limpiar filtros'
-      aria-label='Limpiar filtros'
+      type="button"
+      id="clearFilters"
+      class="bg-accent/80 border-accent-hover focus:border-accent flex h-12 w-full items-center justify-center rounded-md border text-white transition-colors hover:border-red-400 hover:bg-red-500 focus:outline-none md:w-12"
+      title="Limpiar filtros"
+      aria-label="Limpiar filtros"
     >
-      <DeleteFilter class='h-5 w-5' />
+      <DeleteFilter class="h-5 w-5" />
     </button>
   </div>
 </div>
 
 <script>
   const categorySelect = document.getElementById(
-    'category'
-  ) as HTMLSelectElement
-  const tagsDropdown = document.getElementById('tagsDropdown') as HTMLElement
-  const tagsOptions = document.getElementById('tagsOptions') as HTMLElement
-  const tagsDisplay = document.getElementById('tagsDisplay') as HTMLElement
+    "category",
+  ) as HTMLSelectElement;
+  const tagsDropdown = document.getElementById("tagsDropdown") as HTMLElement;
+  const tagsOptions = document.getElementById("tagsOptions") as HTMLElement;
+  const tagsDisplay = document.getElementById("tagsDisplay") as HTMLElement;
   const tagCheckboxes = document.querySelectorAll(
-    '.tag-checkbox'
-  ) as NodeListOf<HTMLInputElement>
+    ".tag-checkbox",
+  ) as NodeListOf<HTMLInputElement>;
   const clearButton = document.getElementById(
-    'clearFilters'
-  ) as HTMLButtonElement
+    "clearFilters",
+  ) as HTMLButtonElement;
 
   function updateTagsDisplay() {
     const selectedTags = Array.from(tagCheckboxes)
       .filter((checkbox) => checkbox.checked)
-      .map((checkbox) => checkbox.value)
+      .map((checkbox) => checkbox.value);
 
     if (selectedTags.length === 0) {
-      tagsDisplay.textContent = 'Seleccionar tags...'
-      tagsDisplay.className = 'flex-1 text-sm text-white text-center'
+      tagsDisplay.textContent = "Seleccionar tags...";
+      tagsDisplay.className = "flex-1 text-sm text-white text-center";
     } else if (selectedTags.length === 1) {
-      tagsDisplay.textContent = selectedTags[0]
-      tagsDisplay.className = 'flex-1 text-sm text-white text-center'
+      tagsDisplay.textContent = selectedTags[0];
+      tagsDisplay.className = "flex-1 text-sm text-white text-center";
     } else {
-      tagsDisplay.textContent = `${selectedTags.length} tags seleccionados`
-      tagsDisplay.className = 'flex-1 text-sm text-white text-center'
+      tagsDisplay.textContent = `${selectedTags.length} tags seleccionados`;
+      tagsDisplay.className = "flex-1 text-sm text-white text-center";
     }
   }
 
   function toggleDropdown() {
-    const isHidden = tagsOptions.classList.contains('hidden')
+    const isHidden = tagsOptions.classList.contains("hidden");
 
     if (isHidden) {
-      tagsOptions.classList.remove('hidden')
+      tagsOptions.classList.remove("hidden");
     } else {
-      tagsOptions.classList.add('hidden')
+      tagsOptions.classList.add("hidden");
     }
   }
 
   function closeDropdown() {
-    tagsOptions.classList.add('hidden')
+    tagsOptions.classList.add("hidden");
   }
 
   function updateURL() {
-    const url = new URL(window.location.href)
+    const url = new URL(window.location.href);
 
-    url.searchParams.delete('category')
-    url.searchParams.delete('tags')
-    url.searchParams.delete('search')
-    url.searchParams.set('page', '1')
+    url.searchParams.delete("category");
+    url.searchParams.delete("tags");
+    url.searchParams.delete("search");
+    url.searchParams.set("page", "1");
 
     if (categorySelect.value) {
-      url.searchParams.set('category', categorySelect.value)
+      url.searchParams.set("category", categorySelect.value);
     }
 
     const selectedTags = Array.from(tagCheckboxes)
       .filter((checkbox) => checkbox.checked)
-      .map((checkbox) => checkbox.value)
+      .map((checkbox) => checkbox.value);
 
     selectedTags.forEach((tag) => {
-      url.searchParams.append('tags', tag)
-    })
+      url.searchParams.append("tags", tag);
+    });
 
-    window.location.href = url.toString()
+    window.location.href = url.toString();
   }
 
-  categorySelect.addEventListener('change', updateURL)
+  categorySelect.addEventListener("change", updateURL);
 
-  tagsDropdown.addEventListener('click', (e) => {
-    e.stopPropagation()
-    toggleDropdown()
-  })
+  tagsDropdown.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggleDropdown();
+  });
 
   tagCheckboxes.forEach((checkbox) => {
-    checkbox.addEventListener('change', (e) => {
-      e.stopPropagation()
-      updateTagsDisplay()
-      setTimeout(updateURL, 100)
-    })
-  })
+    checkbox.addEventListener("change", (e) => {
+      e.stopPropagation();
+      updateTagsDisplay();
+      setTimeout(updateURL, 100);
+    });
+  });
 
-  document.addEventListener('click', (e) => {
+  document.addEventListener("click", (e) => {
     if (
       !tagsDropdown.contains(e.target as Node) &&
       !tagsOptions.contains(e.target as Node)
     ) {
-      closeDropdown()
+      closeDropdown();
     }
-  })
+  });
 
-  tagsOptions.addEventListener('click', (e) => {
-    e.stopPropagation()
-  })
+  tagsOptions.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
 
-  clearButton.addEventListener('click', () => {
-    const url = new URL(window.location.href)
-    url.searchParams.delete('category')
-    url.searchParams.delete('tags')
-    url.searchParams.set('page', '1')
-    window.location.href = url.toString()
-  })
+  clearButton.addEventListener("click", () => {
+    const url = new URL(window.location.href);
+    url.searchParams.delete("category");
+    url.searchParams.delete("tags");
+    url.searchParams.set("page", "1");
+    window.location.href = url.toString();
+  });
 
-  updateTagsDisplay()
+  updateTagsDisplay();
 </script>
