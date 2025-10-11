@@ -1,0 +1,20 @@
+---
+import Button from "../../button/Button.astro";
+import Heading from "../../heading/Heading.astro";
+import Text from "../../text/Text.astro";
+import Link from "../../link/Link.astro";
+import Plus from "@icons/plus.svg";
+---
+
+<div class="bg-primary z-50 ml-80 flex items-center p-5">
+  <div class="flex-1">
+    <Heading className="text-foreground text-3xl font-bold">Dashboard</Heading>
+    <Text className="text-muted-foreground mt-1"
+      >Gestiona tu blog desde aquí</Text
+    >
+  </div>
+  <Button className="flex items-center">
+    <Plus class="mr-2 h-4 w-4" />
+    <Link href="/dashboard/posts/new"> Nuevo Post </Link>
+  </Button>
+</div>

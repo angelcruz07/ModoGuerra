@@ -1,0 +1,26 @@
+---
+import AuthLayout from "@layouts/AuthLayout.astro";
+import AuthCard from "@components/auth/AuthCard.astro";
+
+const cardInfo = {
+  title: "Iniciar sesión",
+  footerText: "Aun no tienes una cuenta?",
+  link: {
+    href: "/auth/sign-up",
+    text: "Regístrate",
+  },
+  textOauthProvider: "Iniciar Sesión con Discord",
+};
+---
+
+<AuthLayout
+  title="Iniciar Sesión"
+  description="Página para iniciar sesión en la aplicación"
+>
+  <AuthCard
+    title={cardInfo.title}
+    footerText={cardInfo.footerText}
+    link={cardInfo.link}
+    textOauthProvider={cardInfo.textOauthProvider}
+  />
+</AuthLayout>

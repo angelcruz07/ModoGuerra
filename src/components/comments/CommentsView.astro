@@ -1,0 +1,55 @@
+---
+import Heading from "../heading/Heading.astro";
+import Text from "../text/Text.astro";
+import Comment from "./Comment.astro";
+import { CommentForm } from "./CommentForm";
+import { actions } from "astro:actions";
+
+interface Props {
+  postId: string;
+}
+
+const { postId } = Astro.props;
+
+const userId = Astro.locals.user?.id ?? null;
+
+const { data } = await Astro.callAction(actions.comment.getCommentsByPostId, {
+  postId: postId,
+});
+
+const comments = data ?? [];
+const totalComments = comments.length;
+---
+
+<section class="mt-10">
+  <article class="border-accent border-y py-10">
+    <Heading component="h2" fontSize="medium">
+      Comentarios {totalComments > 0 ? `(${totalComments})` : ""}
+    </Heading>
+
+    <div class="">
+      {
+        comments.length === 0 ? (
+          <Text className="content-sm mt-5">
+            No hay comentarios aún. Sé el primero en comentar.
+          </Text>
+        ) : (
+          <div class="mt-5 space-y-5">
+            {comments.map((comment) => (
+              // @ts-ignore
+              <Comment comment={comment} />
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </article>
+
+  <div class="mt-5">
+    <Heading component="h3" fontSize="medium" className="mb-3">
+      Dejar un comentario
+    </Heading>
+
+    <CommentForm postId={postId} userId={userId} client:load />
+  </div>
+</section>

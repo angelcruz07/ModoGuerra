@@ -1,0 +1,147 @@
+---
+import { Image } from "astro:assets";
+import Text from "@components/text/Text.astro";
+import Tag from "@components/tags/Tag.astro";
+import Link from "@components/link/Link.astro";
+import Calendar from "@icons/calendar.svg";
+import { type Post } from "@interfaces";
+import { dateFormat } from "@utils/date-format";
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+---
+
+<Link
+  href={`/blog/${post.slug}`}
+  className="block w-full max-w-sm focus:outline-none sm:max-w-md lg:max-w-96"
+>
+  <article
+    class="group relative w-full cursor-pointer overflow-hidden rounded-xl border border-red-400/40 bg-gradient-to-br from-slate-800/60 to-red-900/40 shadow-lg backdrop-blur-sm transition-all duration-300 focus-within:ring-2 focus-within:ring-red-400 focus-within:ring-offset-2 focus-within:ring-offset-slate-900 hover:-translate-y-2 hover:border-red-400/60 hover:bg-gradient-to-br hover:from-slate-700/70 hover:to-red-800/50 hover:shadow-xl hover:shadow-red-400/30"
+    role="article"
+    aria-labelledby={`post-title-${post.slug}`}
+    aria-describedby={`post-description-${post.slug}`}
+  >
+    <!-- Imagen con overlay y efectos -->
+    <div
+      class="relative overflow-hidden"
+      role="img"
+      aria-label={`Imagen del artículo: ${post.title}`}
+    >
+      <Image
+        src={post.image ?? "/images/code.jpg"}
+        alt={`Imagen ilustrativa del artículo: ${post.title}`}
+        width={350}
+        height={200}
+        class="h-36 w-full object-cover transition-transform duration-500 group-hover:scale-110 sm:h-40 md:h-44 lg:h-48"
+        loading="lazy"
+        decoding="async"
+      />
+      <!-- Overlay gradient en la imagen -->
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        aria-hidden="true"
+      >
+      </div>
+    </div>
+    <!-- Contenido de la tarjeta -->
+    <div
+      class="relative min-h-[280px] p-4 sm:min-h-[300px] sm:p-5 lg:h-72 lg:p-6"
+    >
+      <!-- Tags con diseño mejorado -->
+      {
+        post.tags && (
+          <nav
+            class="mb-3 flex flex-wrap gap-1.5 sm:mb-4 sm:gap-2"
+            aria-label="Etiquetas del artículo"
+          >
+            {post.tags.slice(0, 2).map((tag) => (
+              <span
+                class="inline-flex items-center rounded-full bg-red-500/20 px-2 py-1 text-xs font-medium text-red-300 ring-1 ring-red-400/30 transition-colors duration-200 hover:bg-red-500/30 focus:ring-2 focus:ring-red-400 focus:outline-none sm:px-3"
+                tabindex="-1"
+              >
+                <Tag {tag} />
+              </span>
+            ))}
+          </nav>
+        )
+      }
+      <!-- Título -->
+      <h3 id={`post-title-${post.slug}`} class="mb-2 sm:mb-3">
+        <span
+          class="block text-lg leading-tight font-bold text-gray-100 transition-colors duration-300 group-hover:text-red-300 sm:text-xl"
+        >
+          {
+            post.title.length > 60
+              ? post.title.slice(0, 60) + "..."
+              : post.title
+          }
+        </span>
+      </h3>
+      <!-- Descripción -->
+      <Text
+        className="mt-2 mb-2 line-clamp-2 text-sm leading-relaxed text-gray-300 sm:mt-3 sm:line-clamp-3"
+      >
+        {post.description}
+      </Text>
+
+      <!-- Footer con metadata mejorada -->
+      <div
+        class="absolute right-4 bottom-4 left-4 sm:right-5 sm:bottom-5 sm:left-5 lg:right-6 lg:bottom-6 lg:left-6"
+      >
+        <div
+          class="mt-2 flex flex-col gap-3 border-t border-red-400/20 pt-3 sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:pt-4"
+          id={`post-meta-${post.slug}`}
+          aria-label="Información del autor y fecha de publicación"
+        >
+          <div class="flex items-center space-x-2 sm:space-x-3">
+            <!-- Avatar del autor -->
+            <div
+              class="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-red-500 to-red-400 text-xs font-semibold text-white sm:h-8 sm:w-8 sm:text-sm"
+              aria-hidden="true"
+            >
+              {post.author.name.charAt(0).toUpperCase()}
+            </div>
+            <div class="flex min-w-0 flex-col">
+              <span
+                class="truncate text-xs font-medium text-gray-300"
+                title={post.author.name}
+              >
+                {post.author.name}
+              </span>
+              <Text className="text-xs text-gray-500" fontSize="small">
+                Autor
+              </Text>
+            </div>
+          </div>
+
+          <div
+            class="flex flex-shrink-0 items-center space-x-1 text-gray-400"
+            aria-label={`Publicado el ${dateFormat(post.createdAt)}`}
+          >
+            <Calendar
+              color="#f00404"
+              width="12"
+              height="12"
+              aria-hidden="true"
+            />
+            <Text className="text-xs whitespace-nowrap" fontSize="small">
+              <time datetime={post.createdAt.toISOString()}>
+                {dateFormat(post.createdAt)}
+              </time>
+            </Text>
+          </div>
+        </div>
+      </div>
+
+      <!-- Efecto de resplandor al hover -->
+      <div
+        class="absolute inset-0 rounded-xl bg-gradient-to-r from-red-500/0 to-red-400/0 opacity-0 transition-opacity duration-300 group-hover:from-red-500/10 group-hover:to-red-400/10 group-hover:opacity-10"
+        aria-hidden="true"
+      >
+      </div>
+    </div>
+  </article>
+</Link>

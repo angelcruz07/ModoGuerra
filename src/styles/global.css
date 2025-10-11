@@ -1,5 +1,29 @@
 @import "tailwindcss";
+@plugin '@tailwindcss/typography';
 
 @theme {
-  --color-mayus: #f00404;
+  --color-primary: #060606;
+  --color-secondary: #f00404;
+  --color-neutral: #e8d2ff;
+  --color-complementary: #1b1b1b;
+  --color-accent: #2c1d57;
+  --color-accent-hover: #f00404;
+
+  /* Font variables from astro experimentals fonts .astro.config.mjs */
+  --font-primary: var(--font-space-mono);
+  --font-secondary: var(--font-raleway);
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1.2rem;
+
+  @media (width >= --theme(--breakpoint-sm)) {
+    max-width: none;
+    padding-inline: 2rem;
+  }
+
+  @media (width >= 1280px) {
+    max-width: 1536px;
+  }
 }

@@ -1,68 +1,28 @@
 ---
-import Analytics from '@vercel/analytics/astro'
-import "@/styles/global.css";
-import Header from "@/components/Header.astro";
-import '@fontsource/poppins';
+import Head from "@components/seo/Head.astro";
+import Navbar from "@components/shared/Navbar.astro";
+import Footer from "@components/shared/Footer.astro";
+
+import "@styles/global.css";
 
 interface Props {
-	title: string;
+  title: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-    <meta name="description" content="Modo guerra, la red social de los compas, un aplicación enfocada al desarrollo personal de la comunidad del Temach este creador de contenido enfocado al desarrollo perosnal, podrás compartir tu progreso y conectar con gente en el camino del ModoGuerra" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/logo.webp" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-    <Header />
-		<slot />
-    <Analytics />
-	</body>
+  <Head title={title} description={description} />
+  <body class="bg-primary scroll-smooth">
+    <Navbar />
+
+    <main class="container my-10 p-10 md:my-20 md:p-0">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
 </html>
-
-<style is:global>
-	:root {
-    --accent: 220, 38, 38;
-    --accent-light: 248, 113, 113;
-    --accent-dark: 153, 27, 27;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			red 60%
-		);
-    --text-light: #ffffff;
-	}
-
-	html {
-		font-family: 'Poppins', sans-serif;
-    background: #060606;
-    color: #ffffff;
-  }
-
-@media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-    }
-
-  body {
-      display: flex;
-      color: #fff;
-      flex-direction: column;
-      min-height: 100vh;
-      overscroll-behavior: none;
-    }
-  main {
-    padding: 2rem;
-  }
-
-</style>

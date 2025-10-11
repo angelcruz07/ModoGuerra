@@ -1,0 +1,103 @@
+---
+import { Image } from "astro:assets";
+import Link from "../link/Link.astro";
+import X from "@icons/x.svg";
+import Menu from "@icons/menu.svg";
+import { ROUTES_NAV } from "@const";
+import AuthButtonNav from "@components/auth/AuthButtonNav.astro";
+
+const { user } = Astro.locals;
+---
+
+<header
+  class="bg-complementary fixed top-0 z-50 flex h-20 w-full shadow-md duration-300"
+  id="main-header"
+>
+  <nav class="container flex items-center justify-between">
+    <Link href="/">
+      <Image
+        src="/logos/logo.webp"
+        width={50}
+        height={30}
+        alt="Logo devtalles"
+        loading="eager"
+      />
+    </Link>
+
+    <div class="hidden md:block">
+      <div class="flex items-center space-x-8">
+        {
+          ROUTES_NAV.map((route) => {
+            return (
+              <Link href={route.path} colorScheme="accent">
+                {route.name.toUpperCase()}
+              </Link>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    <AuthButtonNav className="hidden md:flex" user={user} />
+
+    <button
+      id="open-menu-button"
+      name="Abrir menu"
+      class="cursor-pointer text-white md:hidden"
+    >
+      <Menu width={30} height={30} />
+    </button>
+
+    <button
+      id="close-menu-button"
+      class="hidden cursor-pointer text-white md:hidden"
+      type="button"
+    >
+      <X width={30} height={30} />
+    </button>
+  </nav>
+</header>
+
+<dialog
+  id="mobile-menu"
+  role="dialog"
+  aria-modal="true"
+  class="bg-complementary fixed top-20 z-50 size-full translate-x-0 text-white transition-discrete duration-300 lg:hidden"
+>
+  <div class="mt-10 flex flex-col items-center justify-between gap-y-8 px-5">
+    <div class="mb-5 flex flex-col items-center gap-y-8">
+      {
+        ROUTES_NAV.map((navLink) => {
+          return (
+            <Link href={navLink.path} colorScheme="accent">
+              {navLink.name}
+            </Link>
+          );
+        })
+      }
+      <AuthButtonNav user={user} />
+    </div>
+  </div>
+</dialog>
+
+<script>
+  import { $ } from "@utils/dom-selector";
+  const mobileMenu = $("#mobile-menu") as HTMLDialogElement;
+  const openMenuButton = $("#open-menu-button");
+  const closeMenuButton = $("#close-menu-button");
+
+  const toggleMenu = () => {
+    if (mobileMenu.open) {
+      mobileMenu.close();
+      openMenuButton?.classList.remove("hidden");
+      closeMenuButton?.classList.add("hidden");
+    } else {
+      mobileMenu.show();
+      openMenuButton?.classList.add("hidden");
+      closeMenuButton?.classList.remove("hidden");
+    }
+  };
+
+  openMenuButton?.addEventListener("click", toggleMenu);
+  closeMenuButton?.addEventListener("click", toggleMenu);
+</script>

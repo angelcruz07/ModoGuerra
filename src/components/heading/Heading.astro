@@ -1,0 +1,45 @@
+---
+import clsx from "clsx";
+
+interface Props {
+  component?: "a" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div";
+  className?: string;
+  fontSize?: "large" | "medium" | "small";
+  color?: "primary" | "secondary" | "accent" | string;
+}
+
+const {
+  component: Tag = "h1",
+  className,
+  fontSize,
+  color = "accent",
+  ...props
+} = Astro.props as Props;
+
+const getHeadingClasses = (
+  fontSize: "large" | "medium" | "small" | undefined,
+  color: string = "accent",
+) => {
+  const sizeMap = {
+    large: "text-4xl sm:text-5xl lg:text-6xl font-black",
+    medium: "text-2xl sm:text-3xl lg:text-4xl font-bold",
+    small: "text-xs sm:text-xl lg:text-2xl font-semibold",
+  };
+
+  const colorMap = {
+    primary: "text-primary",
+    secondary: "text-primary",
+    accent: "text-white",
+  };
+
+  return clsx(
+    "font-secondary",
+    fontSize && sizeMap[fontSize],
+    color && (colorMap[color as keyof typeof colorMap] || color),
+  );
+};
+---
+
+<Tag class={clsx(getHeadingClasses(fontSize, color), className)} {...props}>
+  <slot />
+</Tag>

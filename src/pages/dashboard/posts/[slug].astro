@@ -1,0 +1,52 @@
+---
+import { actions } from "astro:actions";
+import DashboardLayout from "@layouts/DashboardLayout.astro";
+
+import PostForm from "@components/dashboard/post/PostForm";
+import Heading from "@components/heading/Heading.astro";
+import Breadcrumb from "@components/breadcrumb/Breadcrumb.astro";
+
+import { type Post } from "@interfaces";
+
+const { user } = Astro.locals;
+if (!user || user.role !== "admin") return Astro.redirect("/");
+
+const { slug } = Astro.params;
+
+const { data } = await Astro.callAction(actions.category.getCategories, {});
+
+if (!data) return Astro.redirect("/dashboard/posts");
+
+const { data: postData } = await Astro.callAction(actions.post.getPostBySlug, {
+  slug: slug?.trim() || "",
+});
+const post: Post | undefined =
+  postData && isValidPost(postData) ? postData : undefined;
+
+const categories = data.map((category) => ({
+  name: category.name,
+  id: category.id,
+}));
+
+function isValidPost(obj: any): obj is Post {
+  // Add necessary property checks for Post type
+  return obj && typeof obj.id === "string" && typeof obj.title === "string";
+}
+
+const title = slug === "new" ? "Nuevo Post" : "Editar Post";
+---
+
+<DashboardLayout title={title}>
+  <section class="mt-10 ml-80 flex flex-col items-center justify-center p-5">
+    <Breadcrumb />
+    <Heading component="h1" fontSize="medium" className="text-center"
+      >{title}</Heading
+    >
+    <PostForm
+      categories={categories}
+      userId={user.id}
+      post={post}
+      client:only="react"
+    />
+  </section>
+</DashboardLayout>

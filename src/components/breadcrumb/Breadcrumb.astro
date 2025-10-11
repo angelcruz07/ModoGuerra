@@ -1,0 +1,58 @@
+---
+import House from "@icons/house.svg";
+
+const path = Astro.url.pathname;
+const segments = path.split("/").filter(Boolean);
+
+let breadcrumbs = [];
+let currentPath = "";
+
+breadcrumbs.push({
+  name: "Inicio",
+  href: "/",
+  icon: true,
+});
+
+segments.forEach((segment) => {
+  currentPath += `/${segment}`;
+  breadcrumbs.push({
+    name: segment.replace(/-/g, " "),
+    href: currentPath,
+    icon: false,
+  });
+});
+---
+
+<nav aria-label="Breadcrumb" class="my-4">
+  <ol class="text-neutral flex space-x-2 text-sm">
+    {
+      breadcrumbs.map((crumb, index) => (
+        <li class="flex items-center space-x-2">
+          {index > 0 && (
+            <svg
+              class="h-3 w-3 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          )}
+          <a
+            href={crumb.href}
+            class="hover:bg-accent-hover flex items-center justify-center gap-1 rounded-md px-3 py-1.5 transition-colors hover:text-white"
+            aria-current={path === crumb.href ? "page" : undefined}
+          >
+            {crumb.icon && <House />}
+            {crumb.name.charAt(0).toUpperCase() + crumb.name.slice(1)}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</nav>

@@ -1,0 +1,57 @@
+---
+import clsx from "clsx";
+
+interface Props {
+  component?: "button" | "a" | "div";
+  className?: string;
+  size?: "large" | "medium" | "small";
+  variant?: "primary" | "secondary" | "outline";
+  disabled?: boolean;
+}
+
+const {
+  component: Tag = "button",
+  className,
+  size = "medium",
+  variant = "primary",
+  disabled = false,
+  ...props
+} = Astro.props as Props;
+
+const getButtonClasses = (
+  size: "large" | "medium" | "small",
+  variant: "primary" | "secondary" | "outline",
+  disabled: boolean,
+) => {
+  const sizeMap = {
+    large: "px-6 py-3 text-lg",
+    medium: "px-4 py-2 text-base",
+    small: "px-3 py-1.5 text-sm",
+  };
+
+  const variantMap = {
+    primary:
+      "bg-secondary shadow-md shadow-secondary text-white hover:bg-secondary/90",
+    secondary: "bg-gray-200 text-white hover:bg-gray-300",
+    outline:
+      "outline outline-secondary hover:bg-secondary text-white outline-white",
+  };
+
+  const disabledClasses = "opacity-50 cursor-not-allowed";
+
+  return clsx(
+    "cursor-pointer rounded-lg font-bold transition-colors duration-200 ease-in-out",
+    sizeMap[size],
+    variantMap[variant],
+    disabled && disabledClasses,
+  );
+};
+---
+
+<Tag
+  class={clsx(getButtonClasses(size, variant, disabled), className)}
+  disabled={disabled}
+  {...props}
+>
+  <slot />
+</Tag>

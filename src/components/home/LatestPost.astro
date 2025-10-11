@@ -1,0 +1,22 @@
+---
+import Heading from "@components/heading/Heading.astro";
+import PostCard from "@components/post/postcard/PostCard.astro";
+import Text from "@components/text/Text.astro";
+import { type Post } from "@interfaces";
+
+const { data } = Astro.props;
+let { posts } = data as unknown as { posts: Post[] };
+
+posts = posts.slice(0, 3);
+---
+
+<section class="flex flex-col items-center gap-y-10 text-center">
+  <div>
+    <Heading component="h2" fontSize="medium">Últimos Posts</Heading>
+    <Text>Explora los últimos posts de nuestro blog</Text>
+  </div>
+
+  <div class="mt-20 flex flex-col gap-10 md:flex-row">
+    {posts.map((post) => <PostCard post={post} />)}
+  </div>
+</section>
