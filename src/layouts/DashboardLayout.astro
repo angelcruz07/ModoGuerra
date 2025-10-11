@@ -1,0 +1,50 @@
+---
+import "@styles/global.css";
+import Sidebar from "@components/dashboard/ui/Sidebar.astro";
+import Head from "@components/seo/Head.astro";
+import DashboardTop from "@components/dashboard/ui/DashboardTop.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <Head title={title} description={description} />
+  <body class="flex min-h-screen justify-around scroll-smooth">
+    <Sidebar />
+    <main id="main" class="bg-accent w-full">
+      <DashboardTop />
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    color-scheme: light dark;
+  }
+
+  <style > main {
+    display: grid;
+    grid-template-areas: "aside main";
+    grid-template-columns: 320px 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  aside {
+    grid-area: aside;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  #main {
+    grid-area: main;
+    overflow-y: auto;
+  }
+</style>

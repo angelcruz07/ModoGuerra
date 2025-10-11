@@ -1,0 +1,111 @@
+---
+import PostIcon from "@icons/dashboard/post.svg";
+import LogOut from "@icons/dashboard/logout.svg";
+import Link from "../../link/Link.astro";
+
+const { activeSection = "dashboard" } = Astro.props;
+
+const { user } = Astro.locals;
+
+const sidebarItems = [
+  { id: "posts", label: "Posts", icon: PostIcon, path: "/dashboard/posts/" },
+  { id: "home", label: "Inicio", icon: PostIcon, path: "/" },
+];
+---
+
+<aside
+  class="bg-primary border-secondary/50 fixed left-0 flex h-screen w-80 flex-col border-r"
+>
+  <!-- Logo Section -->
+  <div class="border-secondary border-b p-6">
+    <div class="flex items-center gap-3">
+      <div class="relative h-10 w-10">
+        <img
+          src="/svg/isologo-color.svg"
+          alt="Logo"
+          class="h-full w-full object-contain"
+        />
+      </div>
+      <div>
+        <h1 class="text-neutral font-mono text-lg font-bold">Admin Panel</h1>
+        <p class="text-neutral text-sm">Post Management</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Items -->
+  <nav class="flex-1 space-y-2 p-4">
+    <ul class="space-y-1">
+      {
+        sidebarItems.map((item) => {
+          const Icon = item.icon;
+          const isActive = activeSection === item.id;
+          return (
+            <li>
+              <a
+                href={item.path}
+                class={`flex h-12 items-center gap-3 rounded-lg px-3 text-sm font-medium transition-all duration-200 ${
+                  isActive
+                    ? "bg-[var(--color-accent)] text-[var(--color-neutral)]"
+                    : "text-[color-mix(in_srgb,var(--color-neutral)_80%,transparent)] hover:bg-[color-mix(in_srgb,var(--color-accent)_70%,transparent)] hover:text-[var(--color-neutral)]"
+                } `}
+                aria-current={isActive ? "page" : undefined}
+                data-section={item.id}
+              >
+                <Icon class="h-5 w-5" />
+                <span class="font-sans">{item.label}</span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </nav>
+
+  <!-- User Section -->
+  <div class="border-t p-4" style="border-color: var(--color-accent);">
+    <div
+      class="mb-4 flex items-center gap-3 rounded-lg p-3"
+      style="background: var(--color-accent);"
+    >
+      <div
+        class="flex h-8 w-8 items-center justify-center rounded-full"
+        style="background: var(--color-secondary);"
+      >
+        <span class="font-mono text-sm font-bold text-[var(--color-neutral)]">
+          {user?.name?.charAt(0) || "A"}
+        </span>
+      </div>
+      <div class="min-w-0 flex-1">
+        <p class="truncate text-sm font-medium text-[var(--color-neutral)]">
+          {user?.name || "Admin User"}
+        </p>
+        <p
+          class="truncate text-xs text-[color-mix(in_srgb,var(--color-neutral)_70%,transparent)]"
+        >
+          {user?.email || "admin@example.com"}
+        </p>
+      </div>
+    </div>
+    <a
+      href="#"
+      id="btn-logout"
+      class="flex h-10 w-full items-center gap-3 rounded-lg px-3 text-sm font-medium text-[var(--color-neutral)] transition-colors hover:bg-[color-mix(in_srgb,#e06c75_10%,transparent)] hover:text-[#e06c75]"
+    >
+      <LogOut class="h-4 w-4" />
+      <span class="font-sans">Cerrar sesión</span>
+    </a>
+  </div>
+</aside>
+
+<script>
+  import { signOut } from "@lib/auth/auth-client";
+
+  // Logout
+  const btnLogout = document.getElementById("btn-logout");
+  btnLogout?.addEventListener("click", async (e) => {
+    e.preventDefault();
+    await signOut();
+    window.location.href = "/";
+  });
+</script>

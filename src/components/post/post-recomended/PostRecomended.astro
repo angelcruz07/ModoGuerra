@@ -1,0 +1,31 @@
+---
+import { actions } from "astro:actions";
+import Heading from "@components/heading/Heading.astro";
+import GridPost from "@components/post/gridpost/GridPost.astro";
+
+interface Props {
+  postId: string;
+}
+
+const { postId } = Astro.props;
+
+const { data: recommendedPosts } = await Astro.callAction(
+  actions.post.getRecommendedPosts,
+  {
+    postId,
+    limit: 3,
+  },
+);
+
+if (!recommendedPosts || recommendedPosts.length === 0) {
+  return null;
+}
+---
+
+<section class="border-accent mt-20 border-t">
+  <div class="mt-5 mb-10">
+    <Heading component="h2" fontSize="medium"> Posts Recomendados </Heading>
+  </div>
+
+  <GridPost posts={recommendedPosts} />
+</section>

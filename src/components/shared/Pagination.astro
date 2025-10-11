@@ -1,0 +1,45 @@
+---
+interface Props {
+  totalPages: number;
+}
+
+const url = Astro.url;
+const pageParam = Number(url.searchParams.get("page") || 1);
+
+const { totalPages } = Astro.props;
+
+const currentPage = Math.max(
+  pageParam > totalPages ? totalPages : pageParam,
+  1,
+);
+
+const path = url.pathname;
+---
+
+<div class="mt-8 flex w-full items-center justify-between text-white">
+  <a
+    href={`${path}?page=${Math.max(currentPage - 1, 1)}`}
+    class="btn-pagination"
+  >
+    Anterior
+  </a>
+
+  <span>
+    Página {currentPage} de {totalPages}
+  </span>
+
+  <a
+    href={`${path}?page=${Math.min(currentPage + 1, totalPages)}`}
+    class="btn-pagination"
+  >
+    Siguiente
+  </a>
+</div>
+
+<style>
+  @reference '@/styles/global.css';
+
+  .btn-pagination {
+    @apply bg-accent-hover rounded p-2 text-white;
+  }
+</style>

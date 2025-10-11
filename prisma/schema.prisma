@@ -1,0 +1,149 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  admin
+  author  //Crear los posts
+  user    //Solo puede leer los posts
+}
+
+model Category { 
+  id String @id @default(uuid())
+  name String @unique
+
+  posts Post[] @relation("PostCategories")
+
+  @@map("category")
+}
+
+model Comment {
+  id String @id @default(uuid())
+  content String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+  parentId String?
+  parent Comment? @relation("CommentReplies", fields: [parentId], references: [id])
+  replies Comment[] @relation("CommentReplies")
+  postId String
+  userId String
+
+  post Post @relation(fields: [postId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("comment")
+}
+
+model Post {
+  id String @id @default(uuid())
+  title String
+  description String
+  content String
+  likes Like[]
+  image String?
+  tags String[]
+  slug String @unique
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+  createdAt DateTime @default(now())
+  userId String
+  author User @relation("UserPosts", fields: [userId], references: [id])
+  categories Category[] @relation("PostCategories")
+  comments Comment[]
+
+  @@map("post")
+  @@index([slug])
+}
+
+model Like {
+  id        String    @id @default(uuid())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    String
+  post      Post      @relation(fields: [postId], references: [id])
+  postId    String
+
+  @@unique([userId, postId])
+
+  @@map("like")
+}
+
+model User {
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @default(now()) @updatedAt
+
+  role       String?   @default("user")
+  banned     Boolean?
+  banReason  String?
+  banExpires DateTime?
+
+  sessions      Session[]
+  accounts      Account[]
+  posts         Post[]    @relation("UserPosts")
+  comments      Comment[]
+  likes         Like[]
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  @@map("verification")
+}

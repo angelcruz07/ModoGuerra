@@ -1,0 +1,92 @@
+---
+import { Image } from "astro:assets";
+import Text from "@components/text/Text.astro";
+import Button from "../button/Button.astro";
+import Bolt from "@icons/bolt.svg";
+import Code from "@icons/code.svg";
+import ArrowRight from "@icons/arrowRight.svg";
+import Heading from "@components/heading/Heading.astro";
+import Link from "@components/link/Link.astro";
+---
+
+<section class="flex items-center overflow-hidden py-10 md:h-screen lg:py-20">
+  <div class="grid place-items-center gap-12 lg:grid-cols-2">
+    <div class="space-y-8">
+      <div class="fade-in-up space-y-10">
+        <Heading fontSize="large" color="accent">
+          Código, Innovación y <span class="text-secondary">Desarrollo</span>
+        </Heading>
+
+        <Text className="text-neutral">
+          Tu blog de programación donde exploramos las últimas tecnologías,
+          mejores prácticas y tendencias del desarrollo de software.
+        </Text>
+      </div>
+
+      <div class="slide-in-left stagger-2 flex flex-col gap-4 p-1 sm:flex-row">
+        <Link href="/blog">
+          <Button variant="primary" className="flex items-center">
+            Explorar Últimos Posts
+            <ArrowRight
+              class="bounce-gentle ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+            />
+          </Button>
+        </Link>
+
+        <Link href="#categories">
+          <Button variant="outline"> Ver Categorías </Button>
+        </Link>
+      </div>
+
+      <div class="scale-in stagger-3 flex items-center gap-8 pt-8">
+        <div class="hover-lift flex items-center gap-2">
+          <Code class="rotate-gentle h-5 w-5 text-white" />
+          <Text component="span" className="text-muted-foreground text-sm"
+            >500+ Artículos
+          </Text>
+        </div>
+
+        <div class="hover-lift flex items-center gap-2">
+          <Bolt class="bounce-gentle h-5 w-5 text-white" />
+          <Text component="span" className="text-muted-foreground text-sm">
+            Actualizado Diariamente
+          </Text>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-in-right stagger-1 flex justify-center lg:justify-end">
+      <div class="relative mt-15">
+        <Image
+          src="/logos/devi-hello-border.png"
+          alt="Devi Mascot"
+          width={400}
+          height={400}
+          class="float-animation drop-shadow-accent-hover hover-lift"
+          loading="eager"
+        />
+
+        <div
+          class="bg-primary/30 glow-pulse absolute -top-4 -right-4 h-8 w-8 rounded-full"
+        >
+        </div>
+        <div
+          class="bg-secondary/40 pulse-glow stagger-2 absolute -bottom-2 -left-2 h-6 w-6 rounded-full"
+        >
+        </div>
+        <div
+          class="bg-neutral/20 bounce-gentle stagger-3 absolute top-1/2 -left-8 h-4 w-4 rounded-full"
+        >
+        </div>
+        <div
+          class="bg-accent-hover/15 rotate-gentle absolute -top-8 left-1/2 h-5 w-5 rounded-full"
+        >
+        </div>
+        <div
+          class="bg-accent-hover/90 rotate-gentle absolute -top-1/6 right-5 h-5 w-5 rounded-full"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

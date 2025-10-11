@@ -1,0 +1,123 @@
+---
+import Heading from "@components/heading/Heading.astro";
+import Text from "../text/Text.astro";
+import Link from "../link/Link.astro";
+import Github from "@icons/github.svg";
+import Linkedin from "@icons/linkedin.svg";
+import Mail from "@icons/mail.svg";
+import { ROUTES_NAV } from "@const/routes";
+
+const popularCategories = [
+  { href: "/categorias/frontend", label: "Frontend" },
+  { href: "/categorias/backend", label: "Backend" },
+  { href: "/categorias/ai", label: "Inteligencia Artificial" },
+  { href: "/categorias/devops", label: "DevOps" },
+];
+
+const legalLinks = [
+  { href: "/terminos", label: "Términos y Condiciones" },
+  { href: "/privacidad", label: "Política de Privacidad" },
+];
+---
+
+<footer class="bg-complementary border-t text-white">
+  <div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+    <div class="grid gap-8 md:grid-cols-4">
+      {/* Brand */}
+      <div class="space-y-4">
+        <Heading
+          component="h6"
+          className="flex items-center gap-x-3 font-semibold"
+        >
+          <img
+            src="/logos/isologo-b.png"
+            alt="dev/†alles Logo"
+            width="32"
+            height="32"
+          />
+          Devtalles Community Blog
+        </Heading>
+        <Text className="text-muted-foreground text-sm">
+          Tu blog de programación donde exploramos código, innovación y
+          desarrollo.
+        </Text>
+      </div>
+
+      {/* Navigation */}
+      <div>
+        <h3 class="mb-4 font-semibold">Navegación</h3>
+        <ul class="space-y-2 text-sm">
+          {
+            ROUTES_NAV.map((link) => (
+              <li>
+                <Link
+                  href={link.path}
+                  className="text-muted-foreground hover:text-secondary transition-colors"
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      {/* Categories */}
+      <div>
+        <h3 class="mb-4 font-semibold">Categorías Populares</h3>
+        <ul class="space-y-2 text-sm">
+          {
+            popularCategories.map((cat) => (
+              <li>
+                <Link
+                  href={cat.href}
+                  className="text-muted-foreground hover:text-secondary transition-colors"
+                >
+                  {cat.label}
+                </Link>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      {/* Social & Legal */}
+      <div>
+        <h3 class="mb-4 font-semibold">Síguenos</h3>
+        <div class="mb-6 flex space-x-4">
+          <Link
+            href="#"
+            className="text-muted-foreground hover:text-primary transition-colors"
+          >
+            <Github class="h-5 w-5" />
+          </Link>
+          <Link
+            href="#"
+            className="text-muted-foreground hover:text-primary transition-colors"
+          >
+            <Linkedin class="h-5 w-5" />
+          </Link>
+          <Link
+            href="#"
+            className="text-muted-foreground hover:text-primary transition-colors"
+          >
+            <Mail class="h-5 w-5" />
+          </Link>
+        </div>
+        <ul class="space-y-2 text-sm">
+          {
+            legalLinks.map((link) => (
+              <li>
+                <Link href={link.href}>{link.label}</Link>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="text-muted-foreground mt-8 border-t pt-8 text-center text-sm">
+      <Text>&copy; 2024 dev/talles. Todos los derechos reservados.</Text>
+    </div>
+  </div>
+</footer>

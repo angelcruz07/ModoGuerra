@@ -1,41 +1,20 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Introduction from '../components/sections/Introduction.astro';
-import About from '../components/sections/About.astro'
+import Layout from '@layouts/Layout.astro'
+import Hero from '@components/home/Hero.astro'
+import LatestPost from '@components/home/LatestPost.astro'
+import Categories from '@components/home/Categories.astro'
+import { actions } from 'astro:actions'
+const { data } = await Astro.callAction(actions.post.getPostsByPage, {
+  page: 1,
+})
+
+if (!data) {
+  return Astro.redirect('/500')
+}
 ---
 
-<Layout title="Modo Guerra - Próximamente">
-  <main class="flex flex-col">
-    <Introduction />
-    <About/>
-
-    <div class="mt-5">
-      <p class="text-xs">Si deseas colaborar y formar parte del equipo comunicate con alguno de los mantenedores</p>
-      <p class="text-xs">angelcruzsachez126<span class="text-mayus">@gmail.com</span></p>
-    </div>
-  </main>
+<Layout title='Devtalles community Blog'>
+  <Hero />
+  <LatestPost data={data} />
+  <Categories data={data} />
 </Layout>
-
-<style>
-	main {
-    display: flex;
-    align-items: center;
-    justify-items: center;
-    justify-content: center;
-		padding: 1rem;
-		width: full;
-    height: 100vh;
-		color: white;
-		font-size: 20px;
-		line-height: 1.6;
-	}
-
-	h1 {
-		font-size: 4rem;
-		font-weight: 700;
-		line-height: 1;
-		text-align: center;
-		margin-bottom: 1em;
-	}
-
-</style>

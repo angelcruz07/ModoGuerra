@@ -1,0 +1,33 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Post from "@components/post/Post.astro";
+import { actions } from "astro:actions";
+
+const { slug } = Astro.params;
+
+if (!slug) {
+  return Astro.redirect("/404");
+}
+
+const { data: post } = await Astro.callAction(actions.post.getPostBySlug, {
+  slug: slug.trim(),
+});
+
+if (!post) {
+  return Astro.redirect("/404");
+}
+---
+
+<Layout title={`${post.title}`} description={post.description}>
+  <Post
+    post={{
+      ...post,
+      image:
+        typeof post.image === "string"
+          ? post.image
+          : post.image === null
+            ? ""
+            : String(post.image),
+    }}
+  />
+</Layout>

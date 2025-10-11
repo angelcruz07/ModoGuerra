@@ -1,0 +1,53 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+const { isAuthed, user } = Astro.locals;
+
+if (!isAuthed) return Astro.redirect("/auth/sign-in");
+---
+
+<Layout title="Perfil">
+  <section class="flex flex-col items-center justify-start pt-32 min-h-screen">
+    <div class="relative w-full max-w-sm mx-auto">
+      <div class="absolute left-1/2 -top-16 -translate-x-1/2 z-10">
+        <Image
+          src={user!.image ?? "/avatars/avatar-default.jpg"}
+          alt={user!.name}
+          width={120}
+          height={120}
+          class="rounded-full border-4 border-[var(--color-neutral)] shadow-lg object-cover w-32 h-32"
+        />
+      </div>
+      <div class="bg-[var(--color-primary)] rounded-2xl shadow-2xl pt-20 pb-10 px-8 flex flex-col items-center relative border-2 border-[var(--color-secondary)]/30">
+        <h2 class="text-2xl font-bold text-[var(--color-neutral)] mb-1">{user?.name}</h2>
+        <p class="text-[var(--color-secondary)] text-sm mb-4">{user?.email}</p>
+        {user?.role === "admin" && (
+          <a href="/dashboard/posts" class="w-full mb-2">
+            <button class="w-full py-2 rounded-lg bg-[var(--color-primary)] hover:bg-[var(--color-accent-hover)] text-[var(--color-secondary)] font-bold transition hover:text-white">Dashboard</button>
+          </a>
+        )}
+  <button id="btn-logout" class="mt-2 w-full py-2 rounded-lg bg-[var(--color-accent)] hover:bg-[rgb(224,108,117)] text-[var(--color-neutral)] font-bold transition hover:text-white">Cerrar sesión</button>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import { $ } from "@utils/dom-selector";
+  import { signOut } from "@lib/auth/auth-client";
+
+  const logoutButton = $("#btn-logout");
+
+  if (logoutButton) {
+    logoutButton.onclick = () => {
+      signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            window.location.href = "/";
+          },
+        },
+      });
+    };
+  }
+</script>

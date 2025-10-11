@@ -1,0 +1,31 @@
+---
+interface Props {
+  text: string;
+  icon: any;
+}
+
+const { text, icon: Icon } = Astro.props;
+---
+
+<button
+  id="btn-login"
+  class="font-primary border-accent flex cursor-pointer items-center gap-x-5 border-2 p-4 text-xs text-white"
+>
+  <Icon width={25} height={25} />
+  {text}
+</button>
+
+<script>
+  import { $ } from "@utils/dom-selector";
+  import { signIn } from "@lib/auth/auth-client";
+
+  const loginButton = $("#btn-login");
+
+  if (loginButton) {
+    loginButton.onclick = () => {
+      signIn.social({
+        provider: "discord",
+      });
+    };
+  }
+</script>

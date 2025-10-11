@@ -1,0 +1,46 @@
+---
+import clsx from "clsx";
+
+interface Props {
+  component?: "p" | "div" | "span" | "cite" | "blockquote";
+  className?: string;
+  fontSize?: "large" | "medium" | "small";
+  color?: "primary" | "secondary" | "accent" | "none";
+  props?: any;
+}
+
+const {
+  component: Tag = "p",
+  className,
+  fontSize,
+  color = "accent",
+  ...props
+} = Astro.props as Props;
+
+const getTextClasses = (
+  fontSize: "large" | "medium" | "small" | undefined,
+  color: "primary" | "secondary" | "accent" | "none" | undefined,
+) => {
+  const sizeMap = {
+    large: "text-lg lg:text-xl",
+    medium: "text-base",
+    small: "text-sm",
+  };
+
+  const colorMap = {
+    primary: "text-primary",
+    secondary: "text-secondary",
+    accent: "text-white",
+    none: "",
+  };
+
+  return clsx(
+    fontSize ? sizeMap[fontSize] : undefined,
+    color ? colorMap[color] : undefined,
+  );
+};
+---
+
+<Tag class={clsx(getTextClasses(fontSize, color), className)} {...props}>
+  <slot />
+</Tag>

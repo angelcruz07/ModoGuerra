@@ -1,0 +1,24 @@
+---
+import Head from "@components/seo/Head.astro";
+import Navbar from "@components/shared/Navbar.astro";
+import "@styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <Head title={title} description={description} />
+  <body class="bg-primary scroll-smooth">
+    <Navbar />
+    <main class="flex min-h-screen items-center justify-center">
+      <slot />
+    </main>
+    <!-- Todo: Agregar footer -->
+  </body>
+</html>

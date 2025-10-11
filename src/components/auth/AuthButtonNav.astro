@@ -1,0 +1,27 @@
+---
+import Link from "@components/link/Link.astro";
+import Button from "@components/button/Button.astro";
+import Text from "@components/text/Text.astro";
+import { Image } from "astro:assets";
+
+const { user, className } = Astro.props;
+---
+
+{
+  user ? (
+    <Link href="/profile" className={`items-center gap-x-2 ${className}`}>
+      <Image
+        src={user.image ?? "/avatars/default-avatar.png"}
+        class="rounded-full"
+        alt={user.name}
+        width={40}
+        height={40}
+      />
+      <Text>{user.name.split(" ")[0]}</Text>
+    </Link>
+  ) : (
+    <Button className={`md:block ${className}`}>
+      <Link href="/auth/sign-in"> Iniciar Sesión </Link>
+    </Button>
+  )
+}

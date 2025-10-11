@@ -1,0 +1,40 @@
+---
+import DashboardLayout from "@layouts/DashboardLayout.astro";
+
+import { PostView } from "@components/dashboard/post/PostView";
+import Pagination from "@components/shared/Pagination.astro";
+import Heading from "@components/heading/Heading.astro";
+
+import { actions } from "astro:actions";
+
+const { user } = Astro.locals;
+
+if (!user || user.role !== "admin") return Astro.redirect("/");
+
+const searchParams = Astro.url.searchParams;
+const pageParam = Number(searchParams.get("page") ?? 1);
+
+const { data } = await Astro.callAction(actions.post.getPostsByPage, {
+  page: pageParam,
+  limit: 5,
+});
+
+const { totalPages, posts } = data ?? { totalPages: 0, posts: [] };
+---
+
+<DashboardLayout title="Post">
+  <section class="ml-80 p-8">
+    <div class="flex flex-col gap-y-5">
+      {
+        posts.length > 0 ? (
+          posts.map((post) => <PostView post={post} client:load />)
+        ) : (
+          <div>
+            <Heading fontSize="medium">No existen post</Heading>
+          </div>
+        )
+      }
+    </div>
+    <Pagination totalPages={totalPages} />
+  </section>
+</DashboardLayout>

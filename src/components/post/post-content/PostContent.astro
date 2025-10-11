@@ -1,0 +1,16 @@
+---
+import { marked } from "marked";
+
+const { content } = Astro.props;
+
+const contentHtml = marked.parse(content);
+---
+
+<article
+  class="mt-10 flex w-auto max-w-96 justify-center p-5 md:w-full md:max-w-4xl"
+>
+  <div
+    class="prose dark:prose-invert prose-h1:font-bold prose-h1:text-2xl prose-p:text-justify prose-img:rounded-xl prose-headings:underline w-full"
+    set:html={contentHtml}
+  />
+</article>

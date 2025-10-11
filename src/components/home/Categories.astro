@@ -1,0 +1,54 @@
+---
+import Heading from "@components/heading/Heading.astro";
+import Text from "@components/text/Text.astro";
+import type { Post } from "@interfaces";
+
+const { data } = Astro.props;
+let { posts } = data as unknown as { posts: Post[] };
+
+// Usar any para evitar conflictos de tipos
+const todasLasCategorias: any[] = posts.flatMap(
+  (post) => post.categories || [],
+);
+
+const categoriasUnicas = todasLasCategorias.filter(
+  (categoria, index, array) =>
+    array.findIndex((c) => c.id === categoria.id) === index,
+);
+---
+
+<section
+  id="categories"
+  class="my-20 px-5 md:px-10 lg:px-20 xl:px-32 2xl:px-40"
+>
+  <div class="text-center">
+    <Heading component="h2" fontSize="medium">Categorías</Heading>
+    <Text>Explora las categorías de nuestro blog</Text>
+  </div>
+
+  <div
+    class="mt-20 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+  >
+    {
+      categoriasUnicas.map((categoria) => (
+        <a
+          href={`/blog/?&category=${categoria.id}`}
+          class="group relative overflow-hidden rounded-xl border border-purple-400/40 bg-gradient-to-br from-slate-800/60 to-purple-900/40 p-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-purple-400/60 hover:bg-gradient-to-br hover:from-slate-700/70 hover:to-purple-800/50 hover:shadow-xl hover:shadow-purple-400/30"
+        >
+          <div class="flex h-full flex-col items-center justify-center text-center">
+            {/* Nombre de la categoría */}
+            <h3 class="mb-3 text-lg font-semibold text-gray-100 transition-colors duration-300 group-hover:text-purple-300">
+              {categoria.name}
+            </h3>
+
+            {/* Línea decorativa */}
+            <div class="h-1 w-8 rounded-full bg-gradient-to-r from-purple-400 to-purple-300 transition-all duration-300 group-hover:w-12 group-hover:from-purple-300 group-hover:to-purple-200" />
+          </div>
+
+          {/* Efecto de resplandor al hover */}
+          <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500/0 to-purple-400/0 opacity-0 transition-opacity duration-300 group-hover:from-purple-500/20 group-hover:to-purple-400/20 group-hover:opacity-20" />
+        </a>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,35 @@
+---
+import clsx from "clsx";
+
+interface Props {
+  className?: string;
+  colorScheme?: "primary" | "secondary" | "accent";
+  href: string;
+}
+
+const { className, colorScheme, href, ...props } = Astro.props as Props;
+
+const getColorSchemeClasses = (colorScheme: string = "text-primary") => {
+  const colorMap = {
+    primary: "text-primary",
+    secondary: "text-secondary",
+    accent: "text-white",
+  };
+
+  return clsx(
+    "cursor-pointer transition-colors duration-200 ease-in-out",
+    "hover:text-accent-hover",
+    "no-underline",
+    "font-secondary",
+    colorScheme && colorMap[colorScheme as keyof typeof colorMap],
+  );
+};
+---
+
+<a
+  href={href}
+  class={clsx(getColorSchemeClasses(colorScheme), className)}
+  {...props}
+>
+  <slot />
+</a>
