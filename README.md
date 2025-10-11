@@ -1,12 +1,12 @@
 <div align="center">
-  <img src="./public/logos/devi-normal-border.png" width="120" alt="DevTalles" />
+  <img src="./public/logos/logo.webp" width="120" alt="DevTalles" />
 
-  <h1>Code Quest 25</h1>
+  <h1>Modo Guerra</h1>
 
-  <p>DevTalles Community Blog</p>
-  <a href="https://codequest2025.vercel.app/" target="_blank">Live Preview</a>
-  <span>&nbsp;•&nbsp;</span>
-  <a href="#getting-started">Getting Started</a>
+<a href="https://codequest2025.vercel.app/" target="_blank">Live Preview</a>
+<span>&nbsp;•&nbsp;</span>
+<a href="#getting-started">Getting Started</a>
+
 </div>
 
 <div align="center">
@@ -168,4 +168,3 @@ Happy coding! 🚀
 
 - [Angel - Frontend](https://github.com/angelcruz07)
 - [Lizandro - Backend](https://github.com/LizandroBackEnd)
-- [Arif - Frontend](https://github.com/Ariff-dev)

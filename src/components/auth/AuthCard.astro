@@ -20,14 +20,14 @@ const { title, footerText, link, textOauthProvider } = Astro.props;
 ---
 
 <div
-  class="shadow-accent bg-complementary flex max-w-96 flex-col items-center gap-y-5 rounded-2xl p-10 shadow-lg"
+  class="shadow-red-600 bg-complementary flex max-w-96 flex-col items-center gap-y-5 rounded-2xl p-10 shadow-lg"
 >
   <Image
-    src="/logos/devi-normal.png"
+    src="/images/logo3d.png"
     alt="Una descripción de mi imagen."
     width="100"
     height="100"
-    class="drop-shadow-accent drop-shadow-lg"
+    class="drop-shadow-secondary drop-shadow-lg"
   />
 
   <Heading className="text-center" color="text-white" fontSize="large">
@@ -36,10 +36,10 @@ const { title, footerText, link, textOauthProvider } = Astro.props;
 
   <AuthButton text={textOauthProvider} icon={DiscordIcon} />
 
-  <div class="flex gap-x-5">
-    <Text fontSize="small">{footerText}</Text>
-    <Link href={link.href} className="text-sm" colorScheme="secondary"
-      >{link.text}</Link
-    >
-  </div>
+  <!-- <div class="flex gap-x-5"> -->
+  <!--   <Text fontSize="small">{footerText}</Text> -->
+  <!--   <Link href={link.href} className="text-sm" colorScheme="secondary" -->
+  <!--     >{link.text}</Link -->
+  <!--   > -->
+  <!-- </div> -->
 </div>
