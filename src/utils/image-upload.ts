@@ -22,7 +22,7 @@ export class ImageUpload {
       const res = await cloudinary.uploader.upload(
         `data:${mimeType};base64,${base64Image}`,
         {
-          folder: "codequest25/posts",
+          folder: "modoguerra",
           resource_type: "auto",
         },
       );
