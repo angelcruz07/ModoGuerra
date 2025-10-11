@@ -2,12 +2,12 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
-  --color-primary: #0f0620;
-  --color-secondary: #a855f7;
+  --color-primary: #060606;
+  --color-secondary: #f00404;
   --color-neutral: #e8d2ff;
-  --color-complementary: #130c25;
+  --color-complementary: #1b1b1b;
   --color-accent: #2c1d57;
-  --color-accent-hover: #c27aff;
+  --color-accent-hover: #f00404;
 
   /* Font variables from astro experimentals fonts .astro.config.mjs */
   --font-primary: var(--font-space-mono);
