@@ -32,7 +32,7 @@ export const Input = ({
       <input
         type={type}
         required={required}
-        className={`outline-secondary bg-accent border-accet rounded-md border p-2 outline ${inputStyle} ${error ? "border-red-500" : ""}`}
+        className={`outline-secondary  border-accet rounded-md border p-2 outline ${inputStyle} ${error ? "border-red-500" : ""}`}
         {...props}
         {...register(name, validation)}
       />
