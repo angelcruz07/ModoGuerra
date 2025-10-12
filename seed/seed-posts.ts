@@ -17,79 +17,112 @@ const userIds = userSeed.map((u) => u.id);
 
 export const posts: Post[] = [
   {
-    title: "¿Qué es Modo Guerra?",
+    title: "¿Como mantenerse atractivo en una relación?",
     description:
-      "Mi compa, tome el tiempo de refrescar su memoria y recoderle cual es su modo guerra.",
+      "Que es reciprocidad?",
     content:
-      '# Guía Completa de Frontend Moderno\n\nEl desarrollo frontend ha evolucionado rápidamente. Hoy en día, frameworks como React, Vue y Svelte dominan el mercado, pero también es fundamental dominar HTML, CSS y JavaScript puro.\n\n## Consejos clave\n- Utiliza componentes reutilizables.\n- Aprovecha el tipado con TypeScript.\n- Aplica buenas prácticas de accesibilidad (a11y).\n\n## Ejemplo de componente React\n```jsx\nfunction Button({ children }) {\n  return <button className="btn">{children}</button>;\n}\n```\n\n¡No olvides optimizar el rendimiento y la experiencia de usuario!',
+      `# Ser congruente es fundamental
+
+Uno se relaciona con una morra porque ella también se relaciona con uno; es una conexión mutua, no una adoración. La morra no es una diosa, son iguales. No hay que convencerla de nada: ella lo quiere o no lo quiere a uno por lo que realmente es.
+
+## Reflexión
+
+La reciprocidad es la base de las relaciones sanas. Cuando ambas personas se tratan como iguales, se crea un espacio de respeto y autenticidad. Intentar convencer o idealizar a la otra persona rompe esa igualdad y puede generar dinámicas dañinas.
+
+### Puntos clave
+- Relación mutua: las dos partes participan activamente.
+- Respeto: no hay pedestal ni sumisión.
+- Autenticidad: ser uno mismo y aceptarse mutuamente.
+`,
     image:
-      "https://res.cloudinary.com/dlklqucye/image/upload/v1723741683/Modoguerrashop/eltokio.webp",
-    tags: ["frontend", "react", "vue", "svelte", "typescript"],
-    slug: "que-es-modo-guerra",
+      "https://res.cloudinary.com/dlklqucye/image/upload/v1760240405/modoguerra/posts/post1_hj4me9.png",
+    tags: ["relaciones", "reciprocidad"],
+    slug: "como-mantenerse-atractivo-en-una-relacion",
     categories: [categoryNames[0], categoryNames[12]],
     userId: userIds[0],
   },
   {
-    title: "API RESTful con Node.js y Express",
+    title: "La disciplina comienza con uno mismo",
     description:
-      "Aprende a crear una API RESTful profesional usando Node.js y Express.",
-    content:
-      '# API RESTful con Node.js y Express\n\nCrear una API RESTful es esencial para conectar el frontend y el backend. Express es el framework más popular para Node.js.\n\n## Pasos básicos\n1. Instala Express: `npm install express`\n2. Crea un archivo `index.js`:\n```js\nconst express = require("express");\nconst app = express();\napp.get("/", (req, res) => res.send("¡Hola Mundo!"));\napp.listen(3000);\n```\n\n## Buenas prácticas\n- Usa middlewares para validación y autenticación.\n- Documenta tu API con Swagger.',
+      "Deseas ser disciplinado, por eso te ves rodeado de tentaciones.",
+   content:
+    `# La disciplina comienza con uno mismo
+
+La disciplina no es una cualidad mágica que aparece de la noche a la mañana. Es el resultado de decisiones pequeñas y consistentes tomadas cada día. Si deseas ser disciplinado, aceptarás que estarás rodeado de tentaciones: redes sociales, ocio fácil, excusas y distracciones. El punto no es eliminarlas —eso es imposible— sino crear hábitos y límites que te permitan actuar según tus prioridades.
+
+## Por qué la disciplina importa
+
+- Genera progreso sostenido: las acciones repetidas construyen resultados.
+- Reduce la fatiga de decisión: los hábitos automatizan lo importante.
+- Refuerza la autoestima: cumplir compromisos contigo mismo fortalece la confianza.
+
+## Estrategias prácticas para ser más disciplinado
+
+1. Define metas claras y pequeñas
+
+  En lugar de objetivos vagos, establece metas diarias alcanzables. Por ejemplo: "Leer 20 páginas" o "trabajar 60 minutos sin distracciones". Las metas pequeñas se acumulan.
+
+2. Diseña tu entorno
+
+  Elimina o dificulta las tentaciones cuando trabajes en tareas importantes. Si las redes sociales te distraen, usa apps que bloqueen sitios por periodos o deja el teléfono en otra habitación.
+
+3. Usa bloques de tiempo y rituales
+
+  Trabaja por bloques (por ejemplo, 25–50 minutos) y toma descansos cortos. Un ritual de inicio —como preparar una bebida o anotar la tarea del día— ayuda a entrar en modo productivo.
+
+4. Compromisos públicos o con un compañero
+
+  Decir tus objetivos en voz alta o comprometerte con alguien aumenta la probabilidad de cumplimiento.
+
+5. Acepta la fricción y planifica recaídas
+
+  La disciplina no es perfección. Habrá días flojos. Anticipa recaídas y ten planes sencillos para retomarlo: reinicia el día siguiente o reduce la meta temporalmente.
+
+## Hábitos que refuerzan la disciplina
+
+- Dormir lo suficiente: la voluntad decrece cuando estás cansado.
+- Alimentación y ejercicio: mantienen la energía y claridad mental.
+- Revisar tu progreso semanalmente: ajustar metas evita la deriva.
+
+## Reflexión final
+
+Si deseas ser disciplinado, no luches sólo contra las tentaciones: crea sistemas que las neutralicen. La disciplina surge cuando tus valores, tus rutinas y tu entorno trabajan juntos para hacer lo correcto también cuando no te apetece.
+`,
     image:
-      "https://res.cloudinary.com/dlklqucye/image/upload/v1758607446/codequest25/wggvodfzdzdsxwgyxwlj.webp",
-    tags: ["backend", "api", "nodejs", "express"],
-    slug: "api-restful-node-express",
-    categories: [categoryNames[1], categoryNames[20]],
+      "https://res.cloudinary.com/dlklqucye/image/upload/v1760300590/modoguerra/posts/post2_z9ijkq.png",
+    tags: ["disiplina", "habitos", "productividad"],
+    slug: "disciplina-comienza-con-uno-mismo",
+    categories: [categoryNames[0], categoryNames[7]],
     userId: userIds[1],
   },
   {
-    title: "Introducción a DevOps: CI/CD con GitHub Actions",
-    description: "Automatiza tus despliegues y pruebas con pipelines modernos.",
+    title: "Cómo el entorno moldea al individuo",
+    description: "El hombre es un ser inevitablemente determinado por su entorno.",
     content:
-      "# Introducción a DevOps: CI/CD con GitHub Actions\n\nDevOps integra desarrollo y operaciones para entregar software de calidad rápidamente. GitHub Actions permite crear flujos de CI/CD fácilmente.\n\n## Ejemplo de workflow\n```yaml\nname: Node.js CI\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v2\n      - name: Instalar dependencias\n        run: npm install\n      - name: Ejecutar tests\n        run: npm test\n```\n\nAutomatiza pruebas, builds y despliegues para mayor eficiencia.",
+      `# Cómo el entorno moldea al individuo
+
+La afirmación "El hombre es un ser inevitablemente determinado por su entorno" resume una perspectiva sociológica y psicológica: nuestras creencias, hábitos y oportunidades están fuertemente influidas por el contexto en el que vivimos.
+
+## Factores ambientales que nos definen
+
+- Familia y crianza: los valores, expectativas y recursos de la familia configuran la base de comportamiento.
+- Educación y escuela: la exposición a modelos, conocimientos y normas académicas amplía (o limita) horizontes.
+- Comunidad y cultura: normas sociales, idioma y rituales que guían lo aceptable y lo aspiracional.
+- Entorno económico: la disponibilidad de recursos determina opciones y decisiones a corto y largo plazo.
+
+## Determinismo vs. agencia
+
+Aunque el entorno tiene un peso grande, no anula por completo la agencia individual. La mayoría de los teóricos modernos plantean una interacción: el entorno condiciona posibilidades, pero las personas pueden tomar decisiones que alteran su trayectoria.
+
+## Reflexión final
+
+Entender que el entorno nos moldea no es resignarse: es usar esa comprensión para crear mejores ambientes y habilitar elecciones más libres. Nuestra responsabilidad es tanto transformar el entorno como desarrollar la resiliencia necesaria para navegarlo.
+`,
     image:
-      "https://res.cloudinary.com/dlklqucye/image/upload/v1758493154/codequest25/posts/post03_gj3ky1.webp",
-    tags: ["devops", "ci/cd", "github", "actions"],
-    slug: "introduccion-devops-cicd-github-actions",
-    categories: [categoryNames[3], categoryNames[10]],
+      "https://res.cloudinary.com/dlklqucye/image/upload/v1760301186/modoguerra/posts/image_acjztw.png",
+    tags: ["entorno", "sociologia", "psicologia"],
+    slug: "el-entorno-moldea-al-individuo",
+    categories: [categoryNames[13], categoryNames[8]],
     userId: userIds[2],
-  },
-  {
-    title: "Data Science: Análisis Exploratorio con Python",
-    description:
-      "Aprende a analizar datos y obtener insights usando Python y pandas.",
-    content:
-      '# Data Science: Análisis Exploratorio con Python\n\nEl análisis exploratorio de datos (EDA) es el primer paso en cualquier proyecto de ciencia de datos.\n\n## Ejemplo básico con pandas\n```python\nimport pandas as pd\ndf = pd.read_csv("datos.csv")\nprint(df.describe())\n```\n\nVisualiza tus datos con matplotlib o seaborn para detectar patrones y anomalías.',
-    image:
-      "https://res.cloudinary.com/dlklqucye/image/upload/v1758493154/codequest25/posts/post04_cilafq.webp",
-    tags: ["data science", "python", "pandas", "eda"],
-    slug: "data-science-analisis-exploratorio-python",
-    categories: [categoryNames[4], categoryNames[19]],
-    userId: userIds[3],
-  },
-  {
-    title: "Machine Learning: Primer Modelo de Clasificación",
-    description:
-      "Construye tu primer modelo de clasificación con scikit-learn.",
-    content:
-      "# Machine Learning: Primer Modelo de Clasificación\n\nScikit-learn es la librería más popular para machine learning en Python.\n\n## Ejemplo de clasificación\n```python\nfrom sklearn.datasets import load_iris\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.ensemble import RandomForestClassifier\n\niris = load_iris()\nX_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target)\nclf = RandomForestClassifier()\nclf.fit(X_train, y_train)\nprint(clf.score(X_test, y_test))\n```\n\nExperimenta con diferentes algoritmos y parámetros.",
-    image:
-      "https://res.cloudinary.com/dlklqucye/image/upload/v1758493156/codequest25/posts/post05_qubsxy.webp",
-    tags: ["machine learning", "python", "scikit-learn", "clasificacion"],
-    slug: "machine-learning-primer-modelo-clasificacion",
-    categories: [categoryNames[5], categoryNames[4]],
-    userId: userIds[4],
-  },
-  {
-    title: "Arquitectura de Software: Principios SOLID",
-    description: "Mejora la mantenibilidad de tu código aplicando SOLID.",
-    content:
-      "# Arquitectura de Software: Principios SOLID\n\nLos principios SOLID ayudan a escribir código más limpio y escalable:\n\n- **S**: Responsabilidad Única\n- **O**: Abierto/Cerrado\n- **L**: Sustitución de Liskov\n- **I**: Segregación de Interfaces\n- **D**: Inversión de Dependencias\n\n## Ejemplo en TypeScript\n```typescript\ninterface Notificador { enviar(mensaje: string): void; }\nclass Email implements Notificador {\n  enviar(mensaje: string) { /* ... */ }\n}\n```\n\nAplica estos principios en tus proyectos para facilitar el mantenimiento.",
-    image:
-      "https://res.cloudinary.com/dlklqucye/image/upload/v1758493156/codequest25/posts/post06_jw83ou.webp",
-    tags: ["arquitectura", "solid", "typescript", "software"],
-    slug: "arquitectura-software-principios-solid",
-    categories: [categoryNames[6], categoryNames[2]],
-    userId: userIds[0],
-  },
+  }
 ];

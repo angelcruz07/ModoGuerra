@@ -8,23 +8,23 @@ interface User {
 export const users: User[] = [
   {
     id: "A7B9C2D3",
-    name: "Alice Johnson",
-    email: "alice.johnson@example.com",
+    name: "Lizandro Antonio",
+    email: "lizandroantonio@example.com",
     image:
-      "https://res.cloudinary.com/dlklqucye/image/upload/v1758494802/codequest25/users/alice_cjxas5.webp",
+      "https://res.cloudinary.com/dlklqucye/image/upload/v1760214874/modoguerra/users/yo_cec63c.jpg",
   },
   {
     id: "F4G8H1J2",
-    name: "Bob Smith",
-    email: "bob.smith@example.com",
+    name: "Angel Cruz",
+    email: "angelcruz@example.com",
     image:
-      "https://res.cloudinary.com/dlklqucye/image/upload/v1758494802/codequest25/users/bob_zbaoa9.webp",
+      "https://res.cloudinary.com/dlklqucye/image/upload/v1760215486/modoguerra/users/angel_g1nms7.jpg",
   },
   {
     id: "K5L6M7N8",
-    name: "Carlos Rivera",
-    email: "carlos.rivera@example.com",
+    name: "Arrif Martinez",
+    email: "arrifmartinez@example.com",
     image:
-      "https://res.cloudinary.com/dlklqucye/image/upload/v1758494803/codequest25/users/carlos_artqvk.webp",
+      "https://res.cloudinary.com/dlklqucye/image/upload/v1760215491/modoguerra/users/arrif_spohdi.jpg",
   },
 ];
