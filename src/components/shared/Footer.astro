@@ -2,17 +2,11 @@
 import Heading from "@components/heading/Heading.astro";
 import Text from "../text/Text.astro";
 import Link from "../link/Link.astro";
-import Github from "@icons/github.svg";
-import Linkedin from "@icons/linkedin.svg";
-import Mail from "@icons/mail.svg";
-import { ROUTES_NAV } from "@const/routes";
+import Youtube from "@icons/youtube.svg";
+import Instagram from "@icons/instagram.svg";
+import Tiktok from "@icons/tiktok.svg";
 
-const popularCategories = [
-  { href: "/categorias/frontend", label: "Frontend" },
-  { href: "/categorias/backend", label: "Backend" },
-  { href: "/categorias/ai", label: "Inteligencia Artificial" },
-  { href: "/categorias/devops", label: "DevOps" },
-];
+import { ROUTES_NAV } from "@const/routes";
 
 const legalLinks = [
   { href: "/terminos", label: "Términos y Condiciones" },
@@ -64,25 +58,27 @@ const legalLinks = [
 
       {/* Social & Legal */}
       <div>
-        <h3 class="mb-4 font-semibold">Síguenos</h3>
+        <h3 class="mb-4 font-semibold">Sígue al temach</h3>
         <div class="mb-6 flex space-x-4">
           <Link
-            href="#"
+            href="https://www.youtube.com/@ELTEMACH"
             className="text-muted-foreground hover:text-primary transition-colors"
           >
-            <Github class="h-5 w-5" />
+            <Youtube class="h-5 w-5" />
           </Link>
+
           <Link
-            href="#"
+            href="https://www.youtube.com/redirect?event=channel_description&redir_token=QUFFLUhqay05MU9FdmxhdUtmWXhXWmlpQnh1aDdWVE84QXxBQ3Jtc0tuMnI3SEtPN2JFMmpJa3gxeXpuOUoxMTJHZlJXWklJVk5jLTRuQ0Y0S1RCS1ZxOFQ0U3ctUEdVeGZqMVZXNzcyRHpVM0l6WXAxNFZlamJOZW5vQ2ZBMm9sME5QZUV2VW9lTXFiQnliUVlJZUFZcnlMSQ&q=https%3A%2F%2Fwww.instagram.com%2Feltemach"
             className="text-muted-foreground hover:text-primary transition-colors"
           >
-            <Linkedin class="h-5 w-5" />
+            <Instagram class="h-5 w-5" />
           </Link>
+
           <Link
-            href="#"
+            href="https://www.tiktok.com/@eltemach"
             className="text-muted-foreground hover:text-primary transition-colors"
           >
-            <Mail class="h-5 w-5" />
+            <Instagram class="h-5 w-5" />
           </Link>
         </div>
         <ul class="space-y-2 text-sm">
@@ -98,7 +94,7 @@ const legalLinks = [
     </div>
 
     <div class="text-muted-foreground mt-8 border-t pt-8 text-center text-sm">
-      <Text>&copy; 2025 ModoGuerra.</Text>
+      <Text>&copy; 2025 Modo Guerra.</Text>
     </div>
   </div>
 </footer>
