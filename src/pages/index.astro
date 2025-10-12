@@ -1,9 +1,10 @@
 ---
+import { actions } from "astro:actions";
 import Layout from "@layouts/Layout.astro";
 import Hero from "@components/home/Hero.astro";
 import LatestPost from "@components/home/LatestPost.astro";
 import Categories from "@components/home/Categories.astro";
-import { actions } from "astro:actions";
+
 const { data } = await Astro.callAction(actions.post.getPostsByPage, {
   page: 1,
 });

@@ -1,9 +1,7 @@
-import { ActionError, defineAction } from "astro:actions";
-import { z } from "astro:schema";
 import prisma from "@lib/prisma";
+import { ActionError, defineAction } from "astro:actions";
 
 export const getCategories = defineAction({
-  input: z.object({}),
   handler: async () => {
     try {
       const categories = await prisma.category.findMany({
@@ -19,4 +17,3 @@ export const getCategories = defineAction({
     }
   },
 });
-

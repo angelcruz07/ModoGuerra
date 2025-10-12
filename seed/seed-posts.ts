@@ -18,13 +18,10 @@ const userIds = userSeed.map((u) => u.id);
 export const posts: Post[] = [
   {
     title: "¿Como mantenerse atractivo en una relación?",
-    description:
-      "Que es reciprocidad?",
-    content:
-      `# Ser congruente es fundamental
+    description: "Que es reciprocidad?",
+    content: `# Ser congruente es fundamental
 
 Uno se relaciona con una morra porque ella también se relaciona con uno; es una conexión mutua, no una adoración. La morra no es una diosa, son iguales. No hay que convencerla de nada: ella lo quiere o no lo quiere a uno por lo que realmente es.
-
 ## Reflexión
 
 La reciprocidad es la base de las relaciones sanas. Cuando ambas personas se tratan como iguales, se crea un espacio de respeto y autenticidad. Intentar convencer o idealizar a la otra persona rompe esa igualdad y puede generar dinámicas dañinas.
@@ -45,8 +42,7 @@ La reciprocidad es la base de las relaciones sanas. Cuando ambas personas se tra
     title: "La disciplina comienza con uno mismo",
     description:
       "Deseas ser disciplinado, por eso te ves rodeado de tentaciones.",
-   content:
-    `# La disciplina comienza con uno mismo
+    content: `# La disciplina comienza con uno mismo
 
 La disciplina no es una cualidad mágica que aparece de la noche a la mañana. Es el resultado de decisiones pequeñas y consistentes tomadas cada día. Si deseas ser disciplinado, aceptarás que estarás rodeado de tentaciones: redes sociales, ocio fácil, excusas y distracciones. El punto no es eliminarlas —eso es imposible— sino crear hábitos y límites que te permitan actuar según tus prioridades.
 
@@ -97,9 +93,9 @@ Si deseas ser disciplinado, no luches sólo contra las tentaciones: crea sistema
   },
   {
     title: "Cómo el entorno moldea al individuo",
-    description: "El hombre es un ser inevitablemente determinado por su entorno.",
-    content:
-      `# Cómo el entorno moldea al individuo
+    description:
+      "El hombre es un ser inevitablemente determinado por su entorno.",
+    content: `# Cómo el entorno moldea al individuo
 
 La afirmación "El hombre es un ser inevitablemente determinado por su entorno" resume una perspectiva sociológica y psicológica: nuestras creencias, hábitos y oportunidades están fuertemente influidas por el contexto en el que vivimos.
 
@@ -124,5 +120,5 @@ Entender que el entorno nos moldea no es resignarse: es usar esa comprensión pa
     slug: "el-entorno-moldea-al-individuo",
     categories: [categoryNames[13], categoryNames[8]],
     userId: userIds[2],
-  }
+  },
 ];

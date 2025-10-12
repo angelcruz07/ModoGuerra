@@ -1,6 +1,6 @@
 ---
 import { actions } from "astro:actions";
-import DeleteFilter from "../../icons/blog/trash.svg";
+import DeleteFilter from "@icons/blog/trash.svg";
 
 const searchParams = Astro.url.searchParams;
 const currentCategory = searchParams.get("category") || "";
@@ -17,12 +17,12 @@ if (!categories || !tags) {
 }
 ---
 
-<div class="flex flex-col-reverse gap-4 md:flex-row">
-  <div class="min-w-56 flex-1">
+<div class="flex flex-col-reverse w-full gap-4 md:flex-row">
+  <div class="w-full flex-1">
     <select
       id="category"
       name="category"
-      class="border-accent-hover focus:border-accent w-full appearance-none rounded-md border p-3 text-center text-sm text-white focus:outline-none"
+      class="border-secondary cursor-pointer focus:border-secondary w-full appearance-none rounded-md border p-3 text-center text-sm text-white focus:outline-none"
     >
       <option value="">Todas las categorías</option>
       {
@@ -43,7 +43,7 @@ if (!categories || !tags) {
     <div class="relative">
       <div
         id="tagsDropdown"
-        class="border-accent-hover focus:border-accent hover:bg-accent/90 flex min-h-[48px] w-full cursor-pointer items-center justify-between rounded-md border p-3 text-white transition-colors"
+        class="border-accent-hover focus:border-accent flex min-h-[48px] w-full cursor-pointer items-center justify-between rounded-md border p-3 text-white transition-colors"
       >
         <span id="tagsDisplay" class="flex-1 text-center text-sm text-white">
           Seleccionar tags...
@@ -52,7 +52,7 @@ if (!categories || !tags) {
 
       <div
         id="tagsOptions"
-        class="bg-accent/95 border-accent-hover absolute top-full right-0 left-0 z-50 mt-1 hidden max-h-60 overflow-y-auto rounded-md border shadow-lg backdrop-blur-sm"
+        class="bg-red-500 border-accent-hover absolute top-full right-0 left-0 z-50 mt-1 hidden max-h-60 overflow-y-auto rounded-md border shadow-lg backdrop-blur-sm"
       >
         {
           tags &&
@@ -61,7 +61,7 @@ if (!categories || !tags) {
                 <input
                   type="checkbox"
                   value={tag}
-                  class="tag-checkbox mr-2 rounded accent-blue-500"
+                  class="tag-checkbox mr-2 rounded accent-red-500"
                   checked={currentTags.includes(tag)}
                 />
                 <span class="text-sm">{tag}</span>
@@ -76,7 +76,7 @@ if (!categories || !tags) {
     <button
       type="button"
       id="clearFilters"
-      class="bg-accent/80 border-accent-hover focus:border-accent flex h-12 w-full items-center justify-center rounded-md border text-white transition-colors hover:border-red-400 hover:bg-red-500 focus:outline-none md:w-12"
+      class="bg-black cursor-pointer border-accent-hover focus:border-accent flex h-12 w-full items-center justify-center rounded-md border text-white transition-colors hover:border-red-400 hover:bg-red-500 focus:outline-none md:w-12"
       title="Limpiar filtros"
       aria-label="Limpiar filtros"
     >
