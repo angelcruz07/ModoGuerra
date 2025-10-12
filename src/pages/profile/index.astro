@@ -19,15 +19,28 @@ if (!isAuthed) return Astro.redirect("/auth/sign-in");
           class="rounded-full border-4 border-[var(--color-neutral)] shadow-lg object-cover w-32 h-32"
         />
       </div>
-      <div class="bg-[var(--color-primary)] rounded-2xl shadow-2xl pt-20 pb-10 px-8 flex flex-col items-center relative border-2 border-[var(--color-secondary)]/30">
-        <h2 class="text-2xl font-bold text-[var(--color-neutral)] mb-1">{user?.name}</h2>
+      <div
+        class="bg-[var(--color-primary)] rounded-2xl shadow-2xl pt-20 pb-10 px-8 flex flex-col items-center relative border-2 border-[var(--color-secondary)]/30"
+      >
+        <h2 class="text-2xl font-bold text-white mb-1">
+          {user?.name}
+        </h2>
+
         <p class="text-[var(--color-secondary)] text-sm mb-4">{user?.email}</p>
-        {user?.role === "admin" && (
-          <a href="/dashboard/posts" class="w-full mb-2">
-            <button class="w-full py-2 rounded-lg bg-[var(--color-primary)] hover:bg-[var(--color-accent-hover)] text-[var(--color-secondary)] font-bold transition hover:text-white">Dashboard</button>
-          </a>
-        )}
-  <button id="btn-logout" class="mt-2 w-full py-2 rounded-lg bg-[var(--color-accent)] hover:bg-[rgb(224,108,117)] text-[var(--color-neutral)] font-bold transition hover:text-white">Cerrar sesión</button>
+        {
+          user?.role === "admin" && (
+            <a href="/dashboard/posts" class="w-full mb-2 cursor-pointer">
+              <button class="w-full py-2 rounded-lg bg-[var(--color-primary)] border-red-500 hover:bg-[var(--color-accent-hover)] text-[var(--color-secondary)] font-bold transition hover:text-white">
+                Dashboard
+              </button>
+            </a>
+          )
+        }
+        <button
+          id="btn-logout"
+          class="mt-2 w-full py-2 rounded-lg bg-secondary text-white cursor-pointer font-bold transition hover:text-white"
+          >Cerrar sesión</button
+        >
       </div>
     </div>
   </section>
@@ -51,3 +64,4 @@ if (!isAuthed) return Astro.redirect("/auth/sign-in");
     };
   }
 </script>
+

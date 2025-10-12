@@ -1,7 +1,7 @@
 ---
 import PostIcon from "@icons/dashboard/post.svg";
 import LogOut from "@icons/dashboard/logout.svg";
-import Link from "../../link/Link.astro";
+import { Image } from "astro:assets";
 
 const { activeSection = "dashboard" } = Astro.props;
 
@@ -20,11 +20,7 @@ const sidebarItems = [
   <div class="border-secondary border-b p-6">
     <div class="flex items-center gap-3">
       <div class="relative h-10 w-10">
-        <img
-          src="/svg/isologo-color.svg"
-          alt="Logo"
-          class="h-full w-full object-contain"
-        />
+        <Image src="/logo.webp" alt="Logo modo guerra" width={30} height={30} />
       </div>
       <div>
         <h1 class="text-neutral font-mono text-lg font-bold">Admin Panel</h1>
@@ -63,26 +59,18 @@ const sidebarItems = [
   </nav>
 
   <!-- User Section -->
-  <div class="border-t p-4" style="border-color: var(--color-accent);">
-    <div
-      class="mb-4 flex items-center gap-3 rounded-lg p-3"
-      style="background: var(--color-accent);"
-    >
-      <div
-        class="flex h-8 w-8 items-center justify-center rounded-full"
-        style="background: var(--color-secondary);"
-      >
-        <span class="font-mono text-sm font-bold text-[var(--color-neutral)]">
+  <div class="border-t p-4 bg-primary">
+    <div class="mb-4 flex items-center gap-3 rounded-lg p-3">
+      <div class="flex h-8 w-8 items-center justify-center rounded-full">
+        <span class="font-mono text-sm font-bold">
           {user?.name?.charAt(0) || "A"}
         </span>
       </div>
       <div class="min-w-0 flex-1">
-        <p class="truncate text-sm font-medium text-[var(--color-neutral)]">
+        <p class="truncate text-sm font-medium text-white">
           {user?.name || "Admin User"}
         </p>
-        <p
-          class="truncate text-xs text-[color-mix(in_srgb,var(--color-neutral)_70%,transparent)]"
-        >
+        <p class="truncate text-xs text-white">
           {user?.email || "admin@example.com"}
         </p>
       </div>
@@ -90,7 +78,7 @@ const sidebarItems = [
     <a
       href="#"
       id="btn-logout"
-      class="flex h-10 w-full items-center gap-3 rounded-lg px-3 text-sm font-medium text-[var(--color-neutral)] transition-colors hover:bg-[color-mix(in_srgb,#e06c75_10%,transparent)] hover:text-[#e06c75]"
+      class="flex h-10 w-full items-center gap-3 rounded-lg px-3 text-sm font-medium text-white transition-colors hover:bg-[color-mix(in_srgb,#e06c75_10%,transparent)] hover:text-[#e06c75]"
     >
       <LogOut class="h-4 w-4" />
       <span class="font-sans">Cerrar sesión</span>

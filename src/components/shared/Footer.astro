@@ -5,6 +5,7 @@ import Link from "../link/Link.astro";
 import Youtube from "@icons/youtube.svg";
 import Instagram from "@icons/instagram.svg";
 import Tiktok from "@icons/tiktok.svg";
+import { Image } from "astro:assets";
 
 import { ROUTES_NAV } from "@const/routes";
 
@@ -23,9 +24,9 @@ const legalLinks = [
           component="h6"
           className="flex items-center gap-x-3 font-semibold"
         >
-          <img
+          <Image
             src="/logos/logo.webp"
-            alt="dev/†alles Logo"
+            alt="Logo Modo Guerra"
             width="32"
             height="32"
           />
@@ -78,7 +79,7 @@ const legalLinks = [
             href="https://www.tiktok.com/@eltemach"
             className="text-muted-foreground hover:text-primary transition-colors"
           >
-            <Instagram class="h-5 w-5" />
+            <Tiktok class="h-5 w-5" />
           </Link>
         </div>
         <ul class="space-y-2 text-sm">

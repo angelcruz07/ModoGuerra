@@ -20,6 +20,7 @@ if (!data) return Astro.redirect("/dashboard/posts");
 const { data: postData } = await Astro.callAction(actions.post.getPostBySlug, {
   slug: slug?.trim() || "",
 });
+
 const post: Post | undefined =
   postData && isValidPost(postData) ? postData : undefined;
 
