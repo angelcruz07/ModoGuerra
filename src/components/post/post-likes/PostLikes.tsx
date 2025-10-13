@@ -44,7 +44,7 @@ export const PostLikes = ({ postId, user }: Props) => {
   return (
     <div className="mt-10 flex items-start justify-between">
       <div>
-        <span>Likes</span>
+        <span className="text-white">Likes</span>
         <div className="flex gap-x-2 text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
