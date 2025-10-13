@@ -20,8 +20,8 @@ const { user, className } = Astro.props;
       <Text>{user.name.split(" ")[0]}</Text>
     </Link>
   ) : (
-    <Button className={`md:block ${className}`}>
-      <Link href="/auth/sign-in"> Iniciar Sesión </Link>
-    </Button>
+    <Link href="/auth/sign-in">
+      <Button className={`md:block ${className}`}>Iniciar Sesión</Button>
+    </Link>
   )
 }
