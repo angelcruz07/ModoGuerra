@@ -1,0 +1,25 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Heading from "@components/heading/Heading.astro";
+import Text from "@components/text/Text.astro";
+import Button from "@components/button/Button.astro";
+import Link from "@components/link/Link.astro";
+---
+
+<Layout title="404 | Modo Guerra">
+  <section
+    class="min-h-dvh w-full flex flex-col gap-10 items-center justify-center md:gap-12"
+  >
+    <Heading
+      fontSize="large"
+      color="text-secondary"
+      className="text-center text-pretty"
+    >
+      ¡NOOOOOO MI COMPA!</Heading
+    >
+    <Text fontSize="large" className="text-center">
+      Esta página aún no se convierte en un Alfa
+    </Text>
+    <Link href="/"> <Button>Volver al Inicio</Button> </Link>
+  </section>
+</Layout>
