@@ -46,7 +46,7 @@ const { user } = Astro.locals;
 
       <div class="flex items-center gap-2 text-sm">
         <Folder class="h-4 w-4 text-white" />
-        {post.categories.map((category) => <Text>{category.name} -</Text>)}
+        {post.categories.map((category) => <Text>{category.name} - </Text>)}
       </div>
     </article>
 
@@ -54,7 +54,7 @@ const { user } = Astro.locals;
       width={200}
       height={400}
       class="mt-10 h-40 w-full rounded-xl object-cover md:h-96"
-      src={post.image}
+      src={post.image || "/images/default.png"}
       alt={post.description}
     />
 
