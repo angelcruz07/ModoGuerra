@@ -18,7 +18,7 @@ if (!post) {
 }
 ---
 
-<Layout title={`${post.title}`} description={post.description}>
+<Layout title={post.title} description={post.description} image={post.image!}>
   <Post
     post={{
       ...post,
