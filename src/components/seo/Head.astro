@@ -1,22 +1,36 @@
 ---
 import { Font } from "astro:assets";
+import { siteInfo } from "@const/site-info";
 
-const { title, description } = Astro.props;
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = siteInfo.title,
+  description = siteInfo.description,
+  image = siteInfo.image,
+} = Astro.props;
 ---
 
 <head>
+  <title>{title}</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
   <meta name="description" content={description} />
   <meta name="robots" content="follow, index" />
-  <meta
-    property="og:image"
-    content="https://res.cloudinary.com/dlklqucye/image/upload/v1760310621/modoguerra/posts/all/image_vkcqln.png"
-  />
+  <meta name="author" content="angelcruzsanchez126@gmail.com" />
+
+  <!-- OG Tags  -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={image} />
+
   <link rel="icon" type="image/svg+xml" href="/logos/logo.webp" />
 
-  <title>{title}</title>
-
+  <!-- Preload Fonts -->
   <Font cssVariable="--font-raleway" preload />
   <Font cssVariable="--font-space-mono" preload />
 </head>
