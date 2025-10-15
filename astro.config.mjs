@@ -3,9 +3,11 @@ import { defineConfig, fontProviders, envField } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import vercel from "@astrojs/vercel";
 import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://www.modoguerra.com",
   vite: {
     plugins: [tailwindcss()],
   },
@@ -53,5 +55,11 @@ export default defineConfig({
     ],
   },
 
-  integrations: [react()],
+  integrations: [
+    react(),
+    sitemap({
+      filter: (page) =>
+        !page.startsWith("https://www.modoguerra.com/dashboard"),
+    }),
+  ],
 });
