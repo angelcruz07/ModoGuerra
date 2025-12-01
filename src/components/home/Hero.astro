@@ -2,93 +2,256 @@
 import { Image } from "astro:assets";
 import Text from "@components/text/Text.astro";
 import Button from "../button/Button.astro";
-import Bolt from "@icons/bolt.svg";
-import Code from "@icons/code.svg";
 import ArrowRight from "@icons/arrowRight.svg";
 import Heading from "@components/heading/Heading.astro";
 import Link from "@components/link/Link.astro";
 ---
 
-<section class="flex items-center overflow-hidden py-10 md:h-screen lg:py-20">
-  <div class="grid place-items-center gap-12 lg:grid-cols-2">
-    <div class="space-y-8">
-      <div class="fade-in-up space-y-10">
-        <Heading fontSize="large" color="accent">
-          Toma el control de tu vida <span class="text-secondary"
-            >#modoguerra</span
-          >
-        </Heading>
+<section class="relative flex items-center overflow-hidden min-h-screen py-20 md:py-0">
+  <!-- Fondo moderno y equilibrado -->
+  <div class="absolute inset-0 overflow-hidden">
+    <!-- Gradientes sutiles -->
+    <div class="absolute top-0 left-0 h-[800px] w-[800px] rounded-full bg-secondary/10 blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 h-[800px] w-[800px] rounded-full bg-accent/15 blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-secondary/8 blur-3xl"></div>
+    
+    <!-- Grid sutil -->
+    <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(240, 4, 4, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(240, 4, 4, 0.2) 1px, transparent 1px); background-size: 80px 80px;"></div>
 
-        <Text className="text-neutral">
-          Modo Guerra es el sitio web de los compas, desarrolla tus habilidades,
-          comparte tus cabezas de mamut y mejoremos juntos.
-        </Text>
+    <!-- Círculo concéntrico único -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div class="h-[900px] w-[900px] rounded-full border border-secondary/5"></div>
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="container relative z-10 grid place-items-center gap-16 lg:grid-cols-2">
+    <!-- Columna izquierda: Contenido -->
+    <div class="space-y-10">
+      <!-- Badge de estado discreto -->
+      <div class="fade-in-up flex items-center gap-3">
+        <div class="flex items-center gap-2 rounded-full border border-secondary/30 bg-complementary/50 px-3 py-1.5 backdrop-blur-sm">
+          <div class="relative flex h-2 w-2">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-50"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-secondary"></span>
+          </div>
+          <Text className="text-xs font-semibold text-gray-300 uppercase tracking-wide">
+            Live
+          </Text>
+        </div>
+        <Text className="text-xs text-neutral-500">
+          <span class="text-secondary font-semibold">2.2 millones </span> de compas en youtube </Text>
       </div>
 
-      <div class="slide-in-left stagger-2 flex flex-col gap-4 p-1 sm:flex-row">
-        <Link href="/blog">
-          <Button variant="primary" className="flex items-center">
-            Comenzar mi camino
-            <ArrowRight
-              class="bounce-gentle ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
-            />
+      <!-- Título moderno y balanceado -->
+      <div class="scale-in space-y-6">
+        <!-- Pre-título discreto -->
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px flex-1 bg-gradient-to-r from-transparent to-secondary/30"></div>
+          <Text className="text-xs font-bold text-secondary uppercase tracking-widest">
+            El Movimiento
+          </Text>
+          <div class="h-px flex-1 bg-gradient-to-l from-transparent to-secondary/30"></div>
+        </div>
+
+        <!-- Título principal con glow moderado -->
+        <Heading component="h1" className="relative text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight">
+          <!-- Texto principal con efectos moderados -->
+          <div class="relative z-10">
+            <span class="block text-white" style="text-shadow: 0 0 20px rgba(240, 4, 4, 0.3), 0 2px 4px rgba(0, 0, 0, 0.5);">
+              TOMA EL
+            </span>
+            <span class="block bg-gradient-to-r from-secondary via-accent-hover to-secondary bg-clip-text text-transparent animate-gradient" style="filter: drop-shadow(0 0 15px rgba(240, 4, 4, 0.4));">
+              CONTROL DE 
+            </span>
+            <span class="block text-white" style="text-shadow: 0 0 20px rgba(240, 4, 4, 0.3), 0 2px 4px rgba(0, 0, 0, 0.5);">
+              TU VIDA
+            </span>
+          </div>
+        </Heading>
+
+        <!-- Subtítulo balanceado -->
+        <div class="space-y-3 pt-4">
+          <Text className="text-lg md:text-xl text-gray-200 font-bold leading-tight">
+            <span class="text-secondary">#Modoguerra</span>
+          </Text>
+          <Text className="text-base text-neutral-400 leading-relaxed max-w-xl">
+            Únete a miles de <span class="text-secondary font-semibold">compas</span> que se unieron 
+            y están construyendo la mejor versión de sí mismos. 
+            <span class="text-gray-200 font-semibold">El momento es ahora.</span>
+          </Text>
+        </div>
+      </div>
+
+      <!-- Métricas moderadas -->
+      <div class="slide-in-up grid grid-cols-3 gap-3 py-6">
+        <div class="group relative overflow-hidden rounded-xl border border-secondary/20 bg-gradient-to-br from-complementary/60 to-accent/10 p-3 backdrop-blur-sm transition-all duration-300 hover:border-secondary/40 hover:shadow-lg hover:shadow-secondary/20">
+          <div class="absolute inset-0 bg-secondary/5 opacity-0 transition-opacity group-hover:opacity-100"></div>
+          <div class="relative">
+            <Text className="text-2xl md:text-3xl font-bold text-secondary">500+</Text>
+            <Text className="text-xs text-neutral-500 uppercase tracking-wider">Artículos</Text>
+          </div>
+        </div>
+
+        <div class="group relative overflow-hidden rounded-xl border border-secondary/20 bg-gradient-to-br from-complementary/60 to-accent/10 p-3 backdrop-blur-sm transition-all duration-300 hover:border-secondary/40 hover:shadow-lg hover:shadow-secondary/20">
+          <div class="absolute inset-0 bg-secondary/5 opacity-0 transition-opacity group-hover:opacity-100"></div>
+          <div class="relative">
+            <Text className="text-2xl md:text-3xl font-bold text-secondary">10k+</Text>
+            <Text className="text-xs text-neutral-500 uppercase tracking-wider">Compas</Text>
+          </div>
+        </div>
+
+        <div class="group relative overflow-hidden rounded-xl border border-secondary/20 bg-gradient-to-br from-complementary/60 to-accent/10 p-3 backdrop-blur-sm transition-all duration-300 hover:border-secondary/40 hover:shadow-lg hover:shadow-secondary/20">
+          <div class="absolute inset-0 bg-secondary/5 opacity-0 transition-opacity group-hover:opacity-100"></div>
+          <div class="relative">
+            <Text className="text-2xl md:text-3xl font-bold text-secondary">24/7</Text>
+            <Text className="text-xs text-neutral-500 uppercase tracking-wider">Activo</Text>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTAs modernos -->
+      <div class="slide-in-left flex flex-col gap-4 sm:flex-row">
+        <Link href="/blog" className="group">
+          <Button 
+            variant="primary" 
+            className="relative flex items-center gap-2 px-6 py-3 text-base font-semibold shadow-lg shadow-secondary/20 transition-all duration-300 hover:shadow-xl hover:shadow-secondary/30"
+          >
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Activar Modo Guerra
+            <ArrowRight class="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Button>
         </Link>
 
-        <Link href="#categories">
-          <Button variant="outline"> Ver Categorías </Button>
+        <Link href="#about">
+          <Button 
+            variant="outline" 
+            className="border border-secondary/30 px-6 py-3 text-base font-semibold hover:border-secondary/50 hover:bg-secondary/5"
+          >
+            Conocer más
+          </Button>
         </Link>
       </div>
 
-      <div class="scale-in stagger-3 flex items-center gap-8 pt-8">
-        <div class="hover-lift flex items-center gap-2">
-          <Code class="rotate-gentle h-5 w-5 text-white" />
-          <Text component="span" className="text-muted-foreground text-sm"
-            >500+ Artículos
-          </Text>
-        </div>
-
-        <div class="hover-lift flex items-center gap-2">
-          <Bolt class="bounce-gentle h-5 w-5 text-white" />
-          <Text component="span" className="text-muted-foreground text-sm">
-            Actualizado Diariamente
-          </Text>
-        </div>
-      </div>
     </div>
 
-    <div class="slide-in-right stagger-1 flex justify-center lg:justify-end">
-      <div class="relative mt-15">
-        <Image
-          src="/images/Temach.webp"
-          alt="El temach"
-          width={400}
-          height={400}
-          class="float-animation drop-shadow-accent-hover hover-lift"
-          loading="eager"
-        />
-
-        <div
-          class="bg-primary/30 glow-pulse absolute -top-4 -right-4 h-8 w-8 rounded-full"
-        >
-        </div>
-        <div
-          class="bg-secondary/40 pulse-glow stagger-2 absolute -bottom-2 -left-2 h-6 w-6 rounded-full"
-        >
-        </div>
-        <div
-          class="bg-neutral/20 bounce-gentle stagger-3 absolute top-1/2 -left-8 h-4 w-4 rounded-full"
-        >
-        </div>
-        <div
-          class="bg-accent-hover/15 rotate-gentle absolute -top-8 left-1/2 h-5 w-5 rounded-full"
-        >
-        </div>
-        <div
-          class="bg-accent-hover/90 rotate-gentle absolute -top-1/6 right-5 h-5 w-5 rounded-full"
-        >
+    <!-- Columna derecha: Imagen moderna -->
+    <div class="slide-in-right relative flex items-center justify-center">
+      <div class="relative">
+        <!-- Círculo sutil -->
+        <div class="absolute inset-0 -m-16 rounded-full border border-secondary/10"></div>
+        
+        <!-- Imagen principal -->
+        <div class="relative">
+          <Image
+            src="/avatars/eltemach.jpg"
+            alt="El Temach - Modo Guerra"
+            width={450}
+            height={450}
+            class="relative z-10 drop-shadow-xl rounded-full"
+            loading="eager"
+          />
+          <!-- Resplandor sutil -->
+          <div class="absolute -inset-4 bg-gradient-to-r from-secondary/10 to-accent/10 blur-2xl"></div>
         </div>
       </div>
     </div>
   </div>
+
+
 </section>
+
+<style>
+  /* Animación de gradiente */
+  @keyframes gradient {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+  }
+
+  /* Animación de partículas flotantes */
+  @keyframes particle-float {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.6;
+    }
+    25% {
+      transform: translate(20px, -30px) scale(1.2);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translate(-10px, -60px) scale(0.8);
+      opacity: 1;
+    }
+    75% {
+      transform: translate(30px, -40px) scale(1.1);
+      opacity: 0.7;
+    }
+  }
+
+  .particle-float {
+    animation: particle-float 8s ease-in-out infinite;
+  }
+
+  /* Animación de línea de escaneo */
+  @keyframes scan {
+    0% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  .scan-line {
+    animation: scan 8s ease-in-out infinite;
+  }
+
+  /* Efecto de pulso épico */
+  @keyframes epic-pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(1.05);
+    }
+  }
+
+  /* Efecto de glow intenso */
+  @keyframes intense-glow {
+    0%, 100% {
+      filter: brightness(1) drop-shadow(0 0 20px rgba(240, 4, 4, 0.8));
+    }
+    50% {
+      filter: brightness(1.3) drop-shadow(0 0 40px rgba(240, 4, 4, 1));
+    }
+  }
+
+  /* Añadir perspectiva 3D al contenedor */
+  section {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+
+  /* Efecto hover en título */
+  h1 span:hover {
+    animation: intense-glow 1s ease-in-out infinite;
+  }
+</style>
