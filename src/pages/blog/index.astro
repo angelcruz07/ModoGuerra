@@ -29,22 +29,162 @@ const { totalPages, posts } = data;
 ---
 
 <Layout title="Blog | Modo Guerra">
-  <section class="py-20">
-    <div class="space-y-5 text-center">
-      <Heading component="h1" fontSize="large">Todos los post</Heading>
-      <Text>El éxito viene cuando el trabajo y la oportunidad se juntan</Text>
-      <hr class="border-red-500 mx-auto w-20 border-2" />
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden py-16 md:py-24">
+    <!-- Fondo decorativo -->
+    <div class="absolute inset-0 overflow-hidden opacity-30">
+      <div class="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-secondary/20 blur-3xl"></div>
+      <div class="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-accent/20 blur-3xl"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[400px] w-[400px] rounded-full border border-secondary/10"></div>
     </div>
 
-    <!-- Barra de búsqueda -->
-    <div
-      class="mx-auto mt-10 flex flex-col items-center justify-center gap-4 md:flex-row"
-    >
-      <Search />
-      <Filter />
-    </div>
+    <div class="relative z-10 space-y-8 text-center">
+      <!-- Badge Superior -->
+      <div class="fade-in-up flex justify-center">
+        <div class="inline-flex items-center gap-2 rounded-full border border-secondary/40 bg-complementary/50 px-6 py-2 backdrop-blur-sm">
+          <div class="h-2 w-2 rounded-full bg-secondary animate-pulse"></div>
+          <Text className="text-sm font-semibold text-secondary">
+            Blog Oficial
+          </Text>
+        </div>
+      </div>
 
-    <GridPost posts={posts} />
-    <Pagination totalPages={totalPages} />
+      <!-- Título Principal -->
+      <div class="scale-in space-y-4">
+        <Heading component="h1" fontSize="large" className="px-4">
+          <span class="bg-gradient-to-r from-white via-secondary to-accent-hover bg-clip-text text-transparent">
+            Arsenal del #ModoGuerra
+          </span>
+        </Heading>
+        <div class="mx-auto h-1 w-32 rounded-full bg-gradient-to-r from-transparent via-secondary to-transparent"></div>
+      </div>
+
+      <!-- Frases Motivacionales Rotativas -->
+      <div class="slide-in-up mx-auto max-w-2xl px-4">
+        <Text className="text-lg md:text-xl text-neutral-300 leading-relaxed">
+          El <span class="text-secondary font-semibold">éxito</span> viene cuando el 
+          <span class="text-accent-hover font-semibold"> trabajo</span> y la 
+          <span class="text-secondary font-semibold">oportunidad</span> se juntan
+        </Text>
+      </div>
+
+      <!-- Estadísticas Rápidas -->
+      <div class="fade-in-up flex justify-center gap-8 pt-4">
+        <div class="flex items-center gap-2">
+          <div class="flex h-10 w-10 items-center justify-center rounded-lg border border-secondary/40 bg-complementary/50">
+            <svg class="h-5 w-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <div class="text-left">
+            <Text className="text-2xl font-bold text-secondary">500+</Text>
+            <Text className="text-xs text-neutral-400">Artículos</Text>
+          </div>
+        </div>
+
+        <div class="hidden sm:flex items-center gap-2">
+          <div class="flex h-10 w-10 items-center justify-center rounded-lg border border-secondary/40 bg-complementary/50">
+            <svg class="h-5 w-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <div class="text-left">
+            <Text className="text-2xl font-bold text-secondary">Diario</Text>
+            <Text className="text-xs text-neutral-400">Actualizado</Text>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Búsqueda y Filtros -->
+  <section class="relative py-8">
+    <div class="mx-auto max-w-6xl px-5">
+      <!-- Contenedor de búsqueda y filtros con diseño mejorado -->
+      <div class="scale-in rounded-2xl border border-secondary/30 bg-gradient-to-br from-slate-800/60 to-complementary p-6 shadow-xl backdrop-blur-sm">
+        <div class="mb-4 flex items-center gap-2">
+          <svg class="h-5 w-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          <Text className="text-sm font-semibold text-gray-200">
+            Encuentra tu próxima victoria
+          </Text>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <!-- Barra de búsqueda -->
+          <div class="w-full">
+            <Search />
+          </div>
+
+          <!-- Filtros -->
+          <div class="w-full">
+            <Filter />
+          </div>
+        </div>
+
+        <!-- Indicador de filtros activos -->
+        {(categoryParam || tagsParam.length > 0 || searchParam) && (
+          <div class="mt-4 flex flex-wrap items-center gap-2 border-t border-secondary/20 pt-4">
+            <Text className="text-xs text-neutral-400">Filtros activos:</Text>
+            {categoryParam && (
+              <span class="inline-flex items-center gap-1 rounded-full border border-secondary/40 bg-primary/50 px-3 py-1 text-xs text-secondary">
+                Categoría
+              </span>
+            )}
+            {tagsParam.length > 0 && (
+              <span class="inline-flex items-center gap-1 rounded-full border border-secondary/40 bg-primary/50 px-3 py-1 text-xs text-secondary">
+                {tagsParam.length} Tags
+              </span>
+            )}
+            {searchParam && (
+              <span class="inline-flex items-center gap-1 rounded-full border border-secondary/40 bg-primary/50 px-3 py-1 text-xs text-secondary">
+                Búsqueda: "{searchParam}"
+              </span>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Posts -->
+  <section class="py-8">
+    {posts && posts.length > 0 ? (
+      <>
+        <GridPost posts={posts} />
+        <div class="mt-12">
+          <Pagination totalPages={totalPages} />
+        </div>
+      </>
+    ) : (
+      <!-- Estado vacío con diseño mejorado -->
+      <div class="mx-auto max-w-2xl px-5 py-20 text-center">
+        <div class="rounded-3xl border border-secondary/30 bg-gradient-to-br from-slate-800/60 to-complementary p-12 shadow-xl backdrop-blur-sm">
+          <div class="mb-6 flex justify-center">
+            <div class="flex h-20 w-20 items-center justify-center rounded-2xl border-2 border-secondary/40 bg-gradient-to-br from-complementary to-accent/30">
+              <svg class="h-10 w-10 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+          </div>
+          <Heading component="h3" fontSize="medium" className="mb-4">
+            No se encontraron artículos
+          </Heading>
+          <Text className="text-neutral-400 mb-6">
+            Intenta ajustar tus filtros o búsqueda para encontrar lo que necesitas
+          </Text>
+          <a
+            href="/blog"
+            class="inline-flex items-center gap-2 rounded-lg border border-secondary/40 bg-secondary/20 px-6 py-3 text-sm font-semibold text-secondary transition-all hover:border-secondary hover:bg-secondary/30"
+          >
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+            </svg>
+            Ver todos los artículos
+          </a>
+        </div>
+      </div>
+    )}
   </section>
 </Layout>

@@ -17,54 +17,79 @@ if (!categories || !tags) {
 }
 ---
 
-<div class="flex flex-col-reverse w-full gap-4 md:flex-row">
+<div class="flex flex-col w-full gap-3 md:flex-row">
+  <!-- Selector de Categorías -->
   <div class="w-full flex-1">
-    <select
-      id="category"
-      name="category"
-      class="border-secondary cursor-pointer focus:border-secondary w-full appearance-none rounded-md border p-3 text-center text-sm text-white focus:outline-none"
-    >
-      <option value="">Todas las categorías</option>
-      {
-        categories &&
-          categories.map((category) => (
-            <option
-              value={category.id}
-              selected={currentCategory === category.id}
-            >
-              {category.name}
-            </option>
-          ))
-      }
-    </select>
+    <div class="relative group">
+      <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+        <svg class="h-4 w-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+        </svg>
+      </div>
+      
+      <select
+        id="category"
+        name="category"
+        class="w-full appearance-none rounded-xl border border-secondary/40 bg-primary/50 py-3 pl-10 pr-10 text-sm text-white backdrop-blur-sm transition-all duration-300 cursor-pointer focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 hover:border-secondary/60"
+      >
+        <option value="">Todas las categorías</option>
+        {
+          categories &&
+            categories.map((category) => (
+              <option
+                value={category.id}
+                selected={currentCategory === category.id}
+              >
+                {category.name}
+              </option>
+            ))
+        }
+      </select>
+
+      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+        <svg class="h-4 w-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </div>
+    </div>
   </div>
 
+  <!-- Selector de Tags -->
   <div class="min-w-48 flex-1">
     <div class="relative">
+      <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 z-10">
+        <svg class="h-4 w-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path>
+        </svg>
+      </div>
+
       <div
         id="tagsDropdown"
-        class="border-accent-hover focus:border-accent flex min-h-[48px] w-full cursor-pointer items-center justify-between rounded-md border p-3 text-white transition-colors"
+        class="flex min-h-[48px] w-full cursor-pointer items-center justify-between rounded-xl border border-secondary/40 bg-primary/50 py-3 pl-10 pr-10 backdrop-blur-sm transition-all duration-300 hover:border-secondary/60 focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20"
       >
-        <span id="tagsDisplay" class="flex-1 text-center text-sm text-white">
+        <span id="tagsDisplay" class="flex-1 text-sm text-white">
           Seleccionar tags...
         </span>
+        <svg class="h-4 w-4 text-secondary transition-transform duration-300" id="tagsArrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
       </div>
 
       <div
         id="tagsOptions"
-        class="bg-red-500 border-accent-hover absolute top-full right-0 left-0 z-50 mt-1 hidden max-h-60 overflow-y-auto rounded-md border shadow-lg backdrop-blur-sm"
+        class="absolute top-full right-0 left-0 z-50 mt-2 hidden max-h-60 overflow-y-auto rounded-xl border border-secondary/40 bg-slate-900/95 shadow-2xl shadow-secondary/20 backdrop-blur-md"
       >
         {
           tags &&
             tags.map((tag) => (
-              <label class="flex cursor-pointer items-center px-3 py-2 text-white transition-colors hover:bg-white/10">
+              <label class="flex cursor-pointer items-center px-4 py-3 text-white transition-all duration-200 hover:bg-secondary/20 first:rounded-t-xl last:rounded-b-xl group">
                 <input
                   type="checkbox"
                   value={tag}
-                  class="tag-checkbox mr-2 rounded accent-red-500"
+                  class="tag-checkbox mr-3 h-4 w-4 rounded border-secondary/40 bg-primary/50 text-secondary focus:ring-2 focus:ring-secondary/20 cursor-pointer"
                   checked={currentTags.includes(tag)}
                 />
-                <span class="text-sm">{tag}</span>
+                <span class="text-sm group-hover:text-secondary transition-colors">{tag}</span>
               </label>
             ))
         }
@@ -72,15 +97,16 @@ if (!categories || !tags) {
     </div>
   </div>
 
+  <!-- Botón Limpiar -->
   <div class="flex items-end">
     <button
       type="button"
       id="clearFilters"
-      class="bg-black cursor-pointer border-accent-hover focus:border-accent flex h-12 w-full items-center justify-center rounded-md border text-white transition-colors hover:border-red-400 hover:bg-red-500 focus:outline-none md:w-12"
+      class="group flex h-12 w-full md:w-12 items-center justify-center rounded-xl border border-secondary/40 bg-primary/50 text-secondary backdrop-blur-sm transition-all duration-300 hover:border-secondary hover:bg-secondary/20 hover:shadow-lg hover:shadow-secondary/20 focus:outline-none focus:ring-2 focus:ring-secondary/20"
       title="Limpiar filtros"
       aria-label="Limpiar filtros"
     >
-      <DeleteFilter class="h-5 w-5" />
+      <DeleteFilter class="h-5 w-5 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110" />
     </button>
   </div>
 </div>
@@ -118,16 +144,27 @@ if (!categories || !tags) {
 
   function toggleDropdown() {
     const isHidden = tagsOptions.classList.contains("hidden");
+    const tagsArrow = document.getElementById("tagsArrow");
 
     if (isHidden) {
       tagsOptions.classList.remove("hidden");
+      if (tagsArrow) {
+        tagsArrow.style.transform = "rotate(180deg)";
+      }
     } else {
       tagsOptions.classList.add("hidden");
+      if (tagsArrow) {
+        tagsArrow.style.transform = "rotate(0deg)";
+      }
     }
   }
 
   function closeDropdown() {
+    const tagsArrow = document.getElementById("tagsArrow");
     tagsOptions.classList.add("hidden");
+    if (tagsArrow) {
+      tagsArrow.style.transform = "rotate(0deg)";
+    }
   }
 
   function updateURL() {

@@ -1,50 +1,157 @@
 ---
-// Search.astro
 const searchParams = Astro.url.searchParams;
 const currentSearch = searchParams.get("search") || "";
+const uniqueId = `search-${Math.random().toString(36).substring(7)}`;
 ---
 
-<nav class="border-accent-hover mt- w-full rounded-md border">
-  <form method="GET" action="" class="w-full">
+<div class="relative w-full group">
+  <form id={`search-form-${uniqueId}`} method="GET" action="/blog" class="w-full">
+    <!-- Icono de búsqueda -->
+    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 z-10">
+      <svg class="h-5 w-5 text-secondary transition-colors group-hover:text-accent-hover" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+    </div>
+
     <input
+      id={`search-input-${uniqueId}`}
       type="text"
       name="search"
       value={currentSearch}
-      placeholder="Buscar..."
-      class="w-full rounded-md p-3 text-white placeholder-gray-400 focus:outline-none"
+      placeholder="Buscar artículos, tutoriales, guías..."
+      autocomplete="off"
+      class="w-full rounded-xl border border-secondary/40 bg-primary/50 py-3 pl-12 pr-12 text-white placeholder-neutral-500 backdrop-blur-sm transition-all duration-300 focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 hover:border-secondary/60"
     />
 
+    <!-- Botón de limpiar búsqueda -->
+    {currentSearch && (
+      <button
+        type="button"
+        id={`clear-search-${uniqueId}`}
+        class="absolute inset-y-0 right-12 flex items-center pr-2 text-neutral-500 transition-colors hover:text-secondary z-10"
+        aria-label="Limpiar búsqueda"
+      >
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    )}
+
+    <!-- Indicador de carga -->
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 z-10">
+      <div id={`search-loading-${uniqueId}`} class="hidden h-4 w-4 animate-spin rounded-full border-2 border-secondary border-t-transparent"></div>
+    </div>
+
     <!-- Mantener otros parámetros de URL -->
-    {searchParams.get("page") && <input type="hidden" name="page" value="1" />}
-    {
-      searchParams.get("category") && (
-        <input
-          type="hidden"
-          name="category"
-          value={searchParams.get("category")}
-        />
-      )
-    }
-    {
-      searchParams
-        .getAll("tags")
-        .map((tag) => <input type="hidden" name="tags" value={tag} />)
-    }
+    {searchParams.get("category") && (
+      <input
+        type="hidden"
+        name="category"
+        value={searchParams.get("category") || ""}
+      />
+    )}
+    {searchParams.getAll("tags").map((tag) => (
+      <input type="hidden" name="tags" value={tag} />
+    ))}
+    <input type="hidden" name="page" value="1" />
   </form>
-</nav>
 
-<script>
-  const searchInput = document.querySelector(
-    'input[name="search"]',
-  ) as HTMLInputElement;
-  const form = document.querySelector("form") as HTMLFormElement;
+  <!-- Sugerencias de búsqueda (opcional) -->
+  {currentSearch && (
+    <div class="mt-2">
+      <p class="text-xs text-neutral-500">
+        Buscando: <span class="text-secondary font-semibold">"{currentSearch}"</span>
+      </p>
+    </div>
+  )}
+</div>
 
-  let timeout: NodeJS.Timeout;
+<script define:vars={{ uniqueId }}>
+  // Usar el uniqueId para hacer el código específico a esta instancia
+  const searchForm = document.getElementById(`search-form-${uniqueId}`);
+  const searchInput = document.getElementById(`search-input-${uniqueId}`);
+  const searchLoading = document.getElementById(`search-loading-${uniqueId}`);
+  const clearButton = document.getElementById(`clear-search-${uniqueId}`);
 
-  searchInput.addEventListener("input", () => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      form.submit();
-    }, 500); // Buscar después de 500ms de inactividad
-  });
+  let searchTimeout;
+
+  if (searchInput && searchForm) {
+    // Búsqueda con debounce
+    searchInput.addEventListener("input", (e) => {
+      clearTimeout(searchTimeout);
+      
+      const value = e.target.value.trim();
+      
+      // Mostrar indicador de carga si hay texto
+      if (searchLoading) {
+        if (value.length > 0) {
+          searchLoading.classList.remove("hidden");
+        } else {
+          searchLoading.classList.add("hidden");
+        }
+      }
+
+      // Esperar 600ms antes de buscar
+      searchTimeout = setTimeout(() => {
+        searchForm.submit();
+      }, 600);
+    });
+
+    // Botón de limpiar
+    if (clearButton) {
+      clearButton.addEventListener("click", () => {
+        searchInput.value = "";
+        if (searchLoading) {
+          searchLoading.classList.add("hidden");
+        }
+        // Enviar formulario para limpiar la búsqueda
+        searchForm.submit();
+      });
+    }
+
+    // Manejo del envío del formulario
+    searchForm.addEventListener("submit", (e) => {
+      const value = searchInput.value.trim();
+      
+      // Si no hay valor, prevenir el envío o limpiar el parámetro
+      if (!value) {
+        // Opcional: puedes prevenir el envío si prefieres
+        // e.preventDefault();
+      }
+      
+      if (searchLoading) {
+        searchLoading.classList.remove("hidden");
+      }
+    });
+
+    // Atajos de teclado
+    searchInput.addEventListener("keydown", (e) => {
+      // Limpiar con Escape
+      if (e.key === "Escape") {
+        e.preventDefault();
+        searchInput.value = "";
+        searchInput.blur();
+        if (searchLoading) {
+          searchLoading.classList.add("hidden");
+        }
+      }
+    });
+  }
 </script>
+
+<style>
+  /* Mejoras visuales para el input */
+  input[type="text"]:focus {
+    background: rgba(27, 27, 27, 0.8);
+  }
+
+  /* Animación suave para el icono de carga */
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
