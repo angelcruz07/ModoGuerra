@@ -7,97 +7,317 @@ import { ROUTES_NAV } from "@const";
 import AuthButtonNav from "@components/auth/AuthButtonNav.astro";
 
 const { user } = Astro.locals;
+const currentPath = Astro.url.pathname;
 ---
 
 <header
-  class="bg-complementary fixed top-0 z-50 flex h-20 w-full shadow-md duration-300"
+  class="fixed top-0 z-50 w-full transition-all duration-300"
   id="main-header"
 >
-  <nav class="container flex items-center justify-between">
-    <Link href="/">
-      <Image
-        src="/logos/logo.webp"
-        width={50}
-        height={30}
-        alt="Logo devtalles"
-        loading="eager"
-      />
-    </Link>
+  <!-- Barra de navegación principal -->
+  <div class="relative">
+    <!-- Fondo con glassmorphism -->
+    <div class="absolute inset-0 bg-gradient-to-r from-complementary via-primary to-complementary backdrop-blur-xl opacity-95"></div>
+    
+    <!-- Borde inferior con gradiente -->
+    <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary to-transparent opacity-50"></div>
 
-    <div class="hidden md:block">
-      <div class="flex items-center space-x-8">
-        {
-          ROUTES_NAV.map((route) => {
-            return (
-              <Link href={route.path} colorScheme="accent">
+    <!-- Contenido del navbar -->
+    <nav class="container relative flex items-center justify-between py-4">
+      <!-- Logo minimalista y moderno -->
+      <Link href="/" className="group relative flex items-center gap-3">
+        <div class="relative flex items-center">
+          <!-- Logo simple con efecto hover suave -->
+          <div class="relative overflow-hidden transition-all duration-300 group-hover:scale-105">
+            <Image
+              src="/logos/logo.webp"
+              width={42}
+              height={42}
+              alt="Modo Guerra Logo"
+              loading="eager"
+              class="transition-all duration-300 group-hover:brightness-110"
+            />
+          </div>
+        </div>
+        
+        <!-- Texto del logo -->
+        <div class="hidden sm:flex flex-col">
+          <span class="text-lg font-bold leading-tight text-white transition-colors duration-300 group-hover:text-secondary">
+            Modo Guerra
+          </span>
+        </div>
+      </Link>
+
+      <!-- Links de navegación (Desktop) -->
+      <div class="hidden md:flex items-center gap-1 lg:gap-2">
+        {ROUTES_NAV.map((route) => {
+          const isActive = currentPath === route.path || 
+                          (route.path !== '/' && currentPath.startsWith(route.path));
+          
+          return (
+            <a
+              href={route.path}
+              class={`group relative px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-300 ${
+                isActive 
+                  ? 'text-secondary' 
+                  : 'text-gray-300 hover:text-white'
+              }`}
+            >
+              {/* Fondo sutil */}
+              {isActive && (
+                <div class="absolute inset-0 rounded-lg bg-secondary/10 border border-secondary/20"></div>
+              )}
+              
+              {/* Texto */}
+              <span class="relative z-10">
                 {route.name.toUpperCase()}
-              </Link>
-            );
-          })
-        }
+              </span>
+              
+              {/* Barra indicadora inferior con mejor espaciado */}
+              <div class={`absolute -bottom-1 left-1/2 h-0.5 -translate-x-1/2 rounded-full bg-secondary transition-all duration-300 ${
+                isActive 
+                  ? 'w-3/4' 
+                  : 'w-0 group-hover:w-3/4'
+              }`}></div>
+
+              {/* Efecto hover suave */}
+              {!isActive && (
+                <div class="absolute inset-0 rounded-lg bg-secondary/0 transition-all duration-300 group-hover:bg-secondary/5"></div>
+              )}
+            </a>
+          );
+        })}
       </div>
-    </div>
 
-    <AuthButtonNav className="hidden md:flex" user={user} />
+      <!-- Botón de autenticación y menú móvil -->
+      <div class="flex items-center gap-3">
+        <AuthButtonNav className="hidden md:flex" user={user} />
 
-    <button
-      id="open-menu-button"
-      name="Abrir menu"
-      class="cursor-pointer text-white md:hidden"
-    >
-      <Menu width={30} height={30} />
-    </button>
+        {/* Botón abrir menú móvil */}
+        <button
+          id="open-menu-button"
+          name="Abrir menú"
+          aria-label="Abrir menú de navegación"
+          class="group flex h-10 w-10 items-center justify-center rounded-lg border border-secondary/40 bg-primary/50 text-secondary backdrop-blur-sm transition-all duration-300 hover:border-secondary hover:bg-secondary/20 hover:shadow-lg hover:shadow-secondary/30 md:hidden"
+        >
+          <Menu class="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+        </button>
 
-    <button
-      id="close-menu-button"
-      class="hidden cursor-pointer text-white md:hidden"
-      type="button"
-    >
-      <X width={30} height={30} />
-    </button>
-  </nav>
+        {/* Botón cerrar menú móvil */}
+        <button
+          id="close-menu-button"
+          name="Cerrar menú"
+          aria-label="Cerrar menú de navegación"
+          class="group hidden h-10 w-10 items-center justify-center rounded-lg border border-secondary/40 bg-secondary/20 text-secondary backdrop-blur-sm transition-all duration-300 hover:border-secondary hover:bg-secondary/30 hover:shadow-lg hover:shadow-secondary/30 md:hidden"
+        >
+          <X class="h-6 w-6 transition-transform duration-300 group-hover:rotate-90" />
+        </button>
+      </div>
+    </nav>
+  </div>
 </header>
 
+<!-- Menú móvil -->
 <dialog
   id="mobile-menu"
   role="dialog"
   aria-modal="true"
-  class="bg-complementary fixed top-20 z-50 size-full translate-x-0 text-white transition-discrete duration-300 lg:hidden"
+  class="fixed top-[73px] left-0 right-0 z-40 h-[calc(100vh-73px)] transition-all duration-300 backdrop:bg-black/50 lg:hidden"
 >
-  <div class="mt-10 flex flex-col items-center justify-between gap-y-8 px-5">
-    <div class="mb-5 flex flex-col items-center gap-y-8">
-      {
-        ROUTES_NAV.map((navLink) => {
-          return (
-            <Link href={navLink.path} colorScheme="accent">
-              {navLink.name}
-            </Link>
-          );
-        })
-      }
+  <!-- Fondo con glassmorphism -->
+  <div class="absolute inset-0 bg-gradient-to-b from-complementary via-primary to-complementary backdrop-blur-xl opacity-98"></div>
+  
+  <!-- Patrón decorativo -->
+  <div class="absolute inset-0 opacity-5">
+    <div class="h-full w-full" style="background-image: radial-gradient(circle, #f00404 1px, transparent 1px); background-size: 30px 30px;"></div>
+  </div>
+
+  <!-- Contenido del menú -->
+  <div class="relative flex h-full flex-col items-center justify-between py-10 px-5">
+    <div class="flex w-full max-w-md flex-col items-center gap-6">
+      {ROUTES_NAV.map((navLink, index) => {
+        const isActive = currentPath === navLink.path || 
+                        (navLink.path !== '/' && currentPath.startsWith(navLink.path));
+        
+        return (
+          <a
+            href={navLink.path}
+            class={`group relative w-full rounded-xl border transition-all duration-300 ${
+              isActive
+                ? 'border-secondary/60 bg-secondary/20 shadow-lg shadow-secondary/20'
+                : 'border-secondary/30 bg-primary/50 hover:border-secondary/60 hover:bg-secondary/10 hover:shadow-lg hover:shadow-secondary/20'
+            }`}
+            style={`animation: slideInRight 0.3s ease-out ${index * 0.1}s backwards`}
+          >
+            <div class="flex items-center justify-between p-4">
+              <span class={`text-lg font-bold transition-colors duration-300 ${
+                isActive ? 'text-secondary' : 'text-gray-200 group-hover:text-secondary'
+              }`}>
+                {navLink.name}
+              </span>
+              
+              <svg 
+                class={`h-5 w-5 transition-all duration-300 ${
+                  isActive ? 'text-secondary translate-x-0' : 'text-secondary/50 -translate-x-2 group-hover:translate-x-0 group-hover:text-secondary'
+                }`}
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+
+            {/* Barra indicadora lateral */}
+            {isActive && (
+              <div class="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl bg-secondary"></div>
+            )}
+          </a>
+        );
+      })}
+    </div>
+
+    {/* Botón de autenticación en móvil */}
+    <div class="mt-8 w-full max-w-md" style="animation: fadeInUp 0.3s ease-out 0.4s backwards">
       <AuthButtonNav user={user} />
+    </div>
+
+    {/* Footer del menú móvil */}
+    <div class="mt-auto pt-8" style="animation: fadeInUp 0.3s ease-out 0.5s backwards">
+      <div class="flex flex-col items-center gap-3">
+        <div class="flex items-center gap-2">
+          <div class="h-2 w-2 rounded-full bg-secondary animate-pulse"></div>
+          <span class="text-sm font-semibold text-secondary">#ModoGuerra</span>
+        </div>
+        <p class="text-xs text-neutral-500 text-center max-w-xs">
+          Sin pretextos, solo resultados
+        </p>
+      </div>
     </div>
   </div>
 </dialog>
 
 <script>
   import { $ } from "@utils/dom-selector";
+  
   const mobileMenu = $("#mobile-menu") as HTMLDialogElement;
   const openMenuButton = $("#open-menu-button");
   const closeMenuButton = $("#close-menu-button");
+  const mainHeader = $("#main-header");
 
+  // Toggle menú móvil
   const toggleMenu = () => {
     if (mobileMenu.open) {
       mobileMenu.close();
       openMenuButton?.classList.remove("hidden");
       closeMenuButton?.classList.add("hidden");
+      document.body.style.overflow = "";
     } else {
       mobileMenu.show();
       openMenuButton?.classList.add("hidden");
       closeMenuButton?.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
     }
   };
 
   openMenuButton?.addEventListener("click", toggleMenu);
   closeMenuButton?.addEventListener("click", toggleMenu);
+
+  // Cerrar menú al hacer clic en un link
+  const mobileLinks = mobileMenu?.querySelectorAll("a");
+  mobileLinks?.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (mobileMenu.open) {
+        toggleMenu();
+      }
+    });
+  });
+
+  // Efecto de scroll en el navbar
+  let lastScroll = 0;
+  const scrollThreshold = 50;
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.pageYOffset;
+
+    if (mainHeader) {
+      if (currentScroll > scrollThreshold) {
+        // Navbar con efecto blur más intenso al hacer scroll
+        mainHeader.style.boxShadow = "0 10px 30px rgba(240, 4, 4, 0.1)";
+      } else {
+        // Navbar normal
+        mainHeader.style.boxShadow = "none";
+      }
+
+      // Ocultar/mostrar navbar al hacer scroll (opcional)
+      // if (currentScroll > lastScroll && currentScroll > 100) {
+      //   mainHeader.style.transform = "translateY(-100%)";
+      // } else {
+      //   mainHeader.style.transform = "translateY(0)";
+      // }
+    }
+
+    lastScroll = currentScroll;
+  });
+
+  // Cerrar menú con tecla Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && mobileMenu?.open) {
+      toggleMenu();
+    }
+  });
 </script>
+
+<style>
+  /* Animaciones personalizadas */
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Estilos del dialog */
+  dialog {
+    border: none;
+    padding: 0;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  /* Transición suave para el header */
+  #main-header {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+
+  /* Mejorar el glassmorphism */
+  @supports (backdrop-filter: blur(10px)) {
+    #main-header > div > div:first-child {
+      backdrop-filter: blur(20px) saturate(180%);
+    }
+    
+    #mobile-menu > div:first-child {
+      backdrop-filter: blur(20px) saturate(180%);
+    }
+  }
+</style>
