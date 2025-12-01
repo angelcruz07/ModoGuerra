@@ -5,9 +5,12 @@ interface Props {
   className?: string;
   colorScheme?: "primary" | "secondary" | "accent";
   href: string;
+  target?: string;
+  rel?: string;
+  [key: string]: any;
 }
 
-const { className, colorScheme, href, ...props } = Astro.props as Props;
+const { className, colorScheme, href, target, rel, ...props } = Astro.props as Props;
 
 const getColorSchemeClasses = (colorScheme: string = "text-primary") => {
   const colorMap = {
@@ -29,6 +32,8 @@ const getColorSchemeClasses = (colorScheme: string = "text-primary") => {
 <a
   href={href}
   class={clsx(getColorSchemeClasses(colorScheme), className)}
+  target={target}
+  rel={rel}
   {...props}
 >
   <slot />

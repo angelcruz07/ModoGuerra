@@ -1,0 +1,159 @@
+---
+import Text from "@components/text/Text.astro";
+import Heading from "@components/heading/Heading.astro";
+import { Image } from "astro:assets";
+---
+
+<section 
+  id="message-card"
+  class="relative my-16 md:my-24 lg:my-32 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32 2xl:px-40"
+>
+  <!-- Fondo sutil -->
+  <div class="absolute inset-0 overflow-hidden opacity-20">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-secondary/20 blur-3xl"></div>
+  </div>
+
+  <div class="relative z-10 mx-auto w-full max-w-4xl">
+
+    <!-- CARTA TIPO HOJA -->
+    <div class="scale-in relative">
+      <!-- Sombra sutil -->
+      <div class="absolute -inset-4 bg-gradient-to-b from-secondary/10 to-transparent blur-xl"></div>
+      
+      <!-- Carta principal limpia -->
+      <div class="relative border-2 border-secondary/40 bg-gradient-to-br from-slate-900/95 to-complementary/95 shadow-2xl backdrop-blur-sm" style="
+        background-image: 
+          linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),
+          repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(240, 4, 4, 0.05) 2px, rgba(240, 4, 4, 0.05) 3px);
+        border-radius: 8px;
+        box-shadow: 
+          0 10px 50px rgba(0, 0, 0, 0.5),
+          inset 0 0 30px rgba(240, 4, 4, 0.05);
+      ">
+        
+        <!-- Imagen cuadrada esquina superior derecha (responsive) -->
+        <div class="absolute top-4 right-4 sm:top-5 sm:right-5 md:top-6 md:right-6 z-20">
+          <div class="relative group">
+            <div class="overflow-hidden rounded-md sm:rounded-lg border-2 border-secondary/60 bg-gradient-to-br from-complementary to-accent/20 shadow-lg shadow-secondary/30 transition-all duration-300 hover:scale-105">
+              <Image
+                src="/images/temach-cadenita.webp"
+                alt="El Temach"
+                width={100}
+                height={100}
+                class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 object-cover transition-all duration-300 group-hover:brightness-110"
+                loading="eager"
+              />
+            </div>
+          </div>
+        </div>
+
+
+
+      <!-- Contenido de la carta -->
+      <div class="relative z-10 p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20">
+        <!-- Header simple -->
+        <div class="mb-6 md:mb-8 border-b border-secondary/30 pb-4 md:pb-6 pr-16 sm:pr-20 md:pr-24 lg:pr-28">
+          <Heading component="h2" fontSize="medium" className="text-secondary text-xl sm:text-2xl md:text-3xl">
+            Manifiesto del #ModoGuerra
+          </Heading>
+          <Text className="text-xs sm:text-sm text-neutral-400 mt-2">
+            {new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
+          </Text>
+        </div>
+
+        <!-- Cuerpo del mensaje -->
+        <div class="space-y-5 md:space-y-6">
+          <!-- Saludo simple y legible -->
+          <div>
+            <Text color="secondary" className="text-xl sm:text-2xl md:text-3xl font-bold">
+              Mi compa...
+            </Text>
+          </div>
+
+          <!-- Párrafos del mensaje (TEXTO PLACEHOLDER - El usuario lo reemplazará) -->
+          <div class="space-y-4 md:space-y-5 text-sm sm:text-base md:text-lg leading-relaxed sm:pr-20 md:pr-24 lg:pr-28">
+            <p class="text-gray-300">
+              Vivimos en una sociedad que quiere verte fallar no les des el gusto. Hoy demostramos que no estas solo, que somos muchos, 
+              que somos <span class="text-secondary font-semibold">FUERTES.</span><br />
+              Así que no te rindas, el esfuerzo individual es lo que hace la diferencia,
+              tu progreso, tu resilencia y tu constancia es lo que pone en alto el
+              nombre de la comunidad.
+            </p>
+
+            <p class="text-gray-300">
+              Recuerda que el caminio es con paciencia y desapego del resultado, el resultado llegara después de las
+              dificultades, después de la duda y la procastinación.
+              Llegará cuando menos lo esperes así que no te enfoques en el.
+            </p>
+            
+            <p class="text-gray-300">
+              Enfócate  en el camino , en lo que te acompañan, todos los hombres y mujeres que forman
+              parte de este movimiento, todos los compas del mundo comparten contigo la misión de ser mejores.
+              Con ellos cada logro es compartido, y en cada tropiezo hay una mano que te vuelve a levantar.
+              Conócelos, escúchalos y comparte con ellos, que ellos son tu tribu.
+              Es un privilegio pertenecer a un grupo de cabrones obsesionados con ser mejores.
+            </p>
+          </div>
+
+          <!-- Frase destacada simple -->
+          <div class="my-6 md:my-8">
+            <div class="border-l-4 border-secondary bg-secondary/10 p-4 md:p-5 rounded-r-lg">
+              <Text className="text-base sm:text-lg md:text-xl font-semibold italic text-gray-200 leading-relaxed">
+                "Su esfuerzo es nuestro orgullo"
+              </Text>
+            </div>
+          </div>
+
+          <!-- Firma centrada -->
+          <div class="mt-8 md:mt-10 pt-4 md:pt-5 border-t border-secondary/30 text-center">
+            <Text className="text-sm sm:text-base md:text-lg font-bold text-white uppercase tracking-wide">
+              Seamos Cabrones Juntos
+            </Text>
+            <Text color="secondary" className="text-lg sm:text-xl md:text-2xl font-bold italic mt-1">
+              ¡MODO GUERRA!
+            </Text>
+            <Text className="text-xs sm:text-sm text-neutral-500 italic mt-2">
+              El Temach
+            </Text>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Animación suave de aparición */
+  .scale-in {
+    animation: scale-in 0.5s ease-out;
+  }
+
+  @keyframes scale-in {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Ajustes responsive adicionales */
+  @media (max-width: 640px) {
+    /* Asegurar que el contenido no se superponga con la imagen en móvil */
+    #message-card .relative.z-10 > div {
+      min-height: auto;
+    }
+  }
+
+  /* Mejorar legibilidad en pantallas pequeñas */
+  @media (max-width: 768px) {
+    #message-card p {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+  }
+</style>
+

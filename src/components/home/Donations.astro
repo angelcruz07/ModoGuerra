@@ -1,0 +1,117 @@
+---
+import Heading from "@components/heading/Heading.astro";
+import Text from "@components/text/Text.astro";
+import Button from "@components/button/Button.astro";
+import Link from "@components/link/Link.astro";
+---
+
+<section 
+  id="donations"
+  class="my-20 px-5 md:px-10 lg:px-20 xl:px-32 2xl:px-40"
+>
+  <div class="relative overflow-hidden rounded-3xl border border-red-400/50 bg-gradient-to-br from-slate-900/80 via-red-900/30 to-accent/40 p-12 shadow-2xl backdrop-blur-sm">
+    <!-- Elementos decorativos de fondo -->
+    <div class="absolute top-0 right-0 h-64 w-64 rounded-full bg-secondary/10 blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-accent/10 blur-3xl"></div>
+    
+    <div class="relative z-10 mx-auto max-w-3xl text-center space-y-8">
+      <!-- Título -->
+      <div class="fade-in-up">
+        <Heading component="h2" fontSize="medium" color="accent">
+          Apoya el Proyecto
+        </Heading>
+        <div class="mx-auto mt-2 h-1 w-20 rounded-full bg-gradient-to-r from-secondary to-accent-hover"></div>
+      </div>
+
+      <!-- Descripción -->
+      <div class="scale-in space-y-4">
+        <Text className="text-neutral-400 text-lg leading-relaxed">
+          <span class="text-secondary font-semibold">Modo Guerra</span> es un proyecto 
+          100% <span class="text-accent-hover font-semibold">gratuito y de código abierto</span>, 
+          mantenido por la comunidad y para la comunidad.
+        </Text>
+
+        <Text className="text-neutral-400 leading-relaxed">
+          Todas las aportaciones son <span class="text-secondary font-semibold">completamente voluntarias</span> 
+          y nos ayudan a mantener el sitio funcionando, cubrir costos de hosting y seguir creando 
+          contenido de calidad para todos los compas.
+        </Text>
+      </div>
+
+      <!-- Iconos de beneficios -->
+      <div class="slide-in-up grid gap-4 sm:grid-cols-3 pt-6">
+        <div class="hover-lift flex flex-col items-center gap-2 rounded-lg border border-secondary/30 bg-complementary/50 p-4 backdrop-blur-sm transition-all duration-300 hover:border-secondary/60 hover:shadow-lg hover:shadow-secondary/20">
+          <svg class="h-8 w-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+          <Text className="text-sm font-semibold text-gray-100">Hosting</Text>
+          <Text className="text-xs text-neutral-400 text-center">Mantener el sitio en línea</Text>
+        </div>
+
+        <div class="hover-lift flex flex-col items-center gap-2 rounded-lg border border-secondary/30 bg-complementary/50 p-4 backdrop-blur-sm transition-all duration-300 hover:border-secondary/60 hover:shadow-lg hover:shadow-secondary/20">
+          <svg class="h-8 w-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <Text className="text-sm font-semibold text-gray-100">Contenido</Text>
+          <Text className="text-xs text-neutral-400 text-center">Crear más artículos</Text>
+        </div>
+
+        <div class="hover-lift flex flex-col items-center gap-2 rounded-lg border border-secondary/30 bg-complementary/50 p-4 backdrop-blur-sm transition-all duration-300 hover:border-secondary/60 hover:shadow-lg hover:shadow-secondary/20">
+          <svg class="h-8 w-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+          </svg>
+          <Text className="text-sm font-semibold text-gray-100">Mejoras</Text>
+          <Text className="text-xs text-neutral-400 text-center">Nuevas funcionalidades</Text>
+        </div>
+      </div>
+
+      <!-- Botones de donación -->
+      <div class="scale-in stagger-1 pt-4 space-y-4">
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <!-- Ko-fi / PayPal / etc -->
+          <Link href="https://ko-fi.com/modoguerra" target="_blank" rel="noopener noreferrer">
+            <Button variant="primary" className="group flex items-center gap-2 px-8 py-3 text-lg">
+              <svg class="h-6 w-6 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+              Hacer una Donación
+              <svg class="bounce-gentle h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </Button>
+          </Link>
+
+          <!-- GitHub Sponsors (opcional) -->
+          <Link href="https://github.com/angelcruz07/ModoGuerra" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" className="group flex items-center gap-2 border-secondary/40 px-8 py-3 text-lg hover:border-secondary/60">
+              <svg class="h-5 w-5 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+              GitHub Sponsors
+            </Button>
+          </Link>
+        </div>
+
+        <div class="mt-4 flex items-center justify-center gap-2">
+          <div class="h-2 w-2 rounded-full bg-secondary animate-pulse"></div>
+          <Text className="text-xs text-neutral-400">
+            Tu apoyo nos permite seguir creciendo
+          </Text>
+        </div>
+      </div>
+
+      <!-- Nota adicional -->
+      <div class="fade-in-up border-t border-secondary/20 pt-6">
+        <Text className="text-sm text-neutral-400 italic">
+          "Los compas apoyan a los compas. Juntos somos más fuertes en #ModoGuerra"
+        </Text>
+      </div>
+    </div>
+
+    <!-- Elementos decorativos flotantes -->
+    <div class="bg-secondary/30 glow-pulse absolute top-10 right-20 h-4 w-4 rounded-full"></div>
+    <div class="bg-accent-hover/30 pulse-glow absolute bottom-20 left-20 h-5 w-5 rounded-full"></div>
+    <div class="bg-secondary/20 bounce-gentle absolute top-1/2 right-10 h-3 w-3 rounded-full"></div>
+  </div>
+</section>
+

@@ -14,32 +14,166 @@ const currentPage = Math.max(
 );
 
 const path = url.pathname;
+
+// Función para construir URL con todos los parámetros
+const buildUrl = (page: number) => {
+  const params = new URLSearchParams(url.searchParams);
+  params.set("page", page.toString());
+  return `${path}?${params.toString()}`;
+};
+
+// Calcular rango de páginas a mostrar
+const getPageNumbers = () => {
+  const delta = 2; // Páginas a mostrar a cada lado de la actual
+  const pages: (number | string)[] = [];
+  
+  for (let i = 1; i <= totalPages; i++) {
+    if (
+      i === 1 || // Primera página
+      i === totalPages || // Última página
+      (i >= currentPage - delta && i <= currentPage + delta) // Páginas cercanas
+    ) {
+      pages.push(i);
+    } else if (pages[pages.length - 1] !== '...') {
+      pages.push('...');
+    }
+  }
+  
+  return pages;
+};
+
+const pageNumbers = getPageNumbers();
+const isFirstPage = currentPage === 1;
+const isLastPage = currentPage === totalPages;
 ---
 
-<div class="mt-8 flex w-full items-center justify-between text-white">
-  <a
-    href={`${path}?page=${Math.max(currentPage - 1, 1)}`}
-    class="btn-pagination"
-  >
-    Anterior
-  </a>
+<nav class="mt-12 flex flex-col items-center gap-6" aria-label="Paginación">
+  <!-- Info de página actual (móvil) -->
+  <div class="flex items-center gap-2 text-sm text-neutral-400 md:hidden">
+    <svg class="h-4 w-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+    </svg>
+    <span>
+      Página <span class="font-semibold text-secondary">{currentPage}</span> de <span class="font-semibold text-gray-200">{totalPages}</span>
+    </span>
+  </div>
 
-  <span>
-    Página {currentPage} de {totalPages}
-  </span>
+  <!-- Controles de paginación -->
+  <div class="flex items-center gap-2">
+    <!-- Botón Anterior -->
+    {isFirstPage ? (
+      <button
+        disabled
+        class="group flex items-center gap-2 rounded-xl border border-secondary/20 bg-primary/30 px-4 py-2 text-sm font-semibold text-neutral-600 cursor-not-allowed"
+        aria-label="Página anterior (deshabilitado)"
+      >
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        <span class="hidden sm:inline">Anterior</span>
+      </button>
+    ) : (
+      <a
+        href={buildUrl(currentPage - 1)}
+        class="group flex items-center gap-2 rounded-xl border border-secondary/40 bg-primary/50 px-4 py-2 text-sm font-semibold text-secondary backdrop-blur-sm transition-all duration-300 hover:-translate-x-1 hover:border-secondary hover:bg-secondary/20 hover:shadow-lg hover:shadow-secondary/20"
+        aria-label="Página anterior"
+      >
+        <svg class="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        <span class="hidden sm:inline">Anterior</span>
+      </a>
+    )}
 
-  <a
-    href={`${path}?page=${Math.min(currentPage + 1, totalPages)}`}
-    class="btn-pagination"
-  >
-    Siguiente
-  </a>
-</div>
+    <!-- Números de página -->
+    <div class="hidden md:flex items-center gap-1">
+      {pageNumbers.map((page) => (
+        page === '...' ? (
+          <span class="flex h-10 w-10 items-center justify-center text-neutral-500">
+            ···
+          </span>
+        ) : (
+          page === currentPage ? (
+            <span
+              class="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-secondary bg-secondary/20 font-bold text-secondary shadow-lg shadow-secondary/30"
+              aria-current="page"
+              aria-label={`Página ${page} (actual)`}
+            >
+              {page}
+            </span>
+          ) : (
+            <a
+              href={buildUrl(page as number)}
+              class="flex h-10 w-10 items-center justify-center rounded-xl border border-secondary/30 bg-primary/50 font-semibold text-gray-300 backdrop-blur-sm transition-all duration-300 hover:border-secondary hover:bg-secondary/20 hover:text-secondary hover:shadow-lg hover:shadow-secondary/20 hover:scale-110"
+              aria-label={`Ir a página ${page}`}
+            >
+              {page}
+            </a>
+          )
+        )
+      ))}
+    </div>
 
-<style>
-  @reference '@/styles/global.css';
+    <!-- Indicador compacto para tablet/móvil -->
+    <div class="flex md:hidden items-center gap-2 px-4 py-2 rounded-xl border border-secondary/30 bg-primary/50 backdrop-blur-sm">
+      <span class="text-sm font-semibold text-secondary">{currentPage}</span>
+      <span class="text-xs text-neutral-500">/</span>
+      <span class="text-sm text-gray-300">{totalPages}</span>
+    </div>
 
-  .btn-pagination {
-    @apply bg-accent-hover rounded p-2 text-white;
-  }
-</style>
+    <!-- Botón Siguiente -->
+    {isLastPage ? (
+      <button
+        disabled
+        class="group flex items-center gap-2 rounded-xl border border-secondary/20 bg-primary/30 px-4 py-2 text-sm font-semibold text-neutral-600 cursor-not-allowed"
+        aria-label="Página siguiente (deshabilitado)"
+      >
+        <span class="hidden sm:inline">Siguiente</span>
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+    ) : (
+      <a
+        href={buildUrl(currentPage + 1)}
+        class="group flex items-center gap-2 rounded-xl border border-secondary/40 bg-primary/50 px-4 py-2 text-sm font-semibold text-secondary backdrop-blur-sm transition-all duration-300 hover:translate-x-1 hover:border-secondary hover:bg-secondary/20 hover:shadow-lg hover:shadow-secondary/20"
+        aria-label="Página siguiente"
+      >
+        <span class="hidden sm:inline">Siguiente</span>
+        <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    )}
+  </div>
+
+  <!-- Salto rápido a primera/última (solo si hay muchas páginas) -->
+  {totalPages > 5 && (currentPage > 3 || currentPage < totalPages - 2) && (
+    <div class="flex items-center gap-3 text-xs">
+      {currentPage > 3 && (
+        <a
+          href={buildUrl(1)}
+          class="flex items-center gap-1 text-neutral-500 transition-colors hover:text-secondary"
+          aria-label="Ir a la primera página"
+        >
+          <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"></path>
+          </svg>
+          <span class="hidden sm:inline">Primera</span>
+        </a>
+      )}
+      {currentPage < totalPages - 2 && (
+        <a
+          href={buildUrl(totalPages)}
+          class="flex items-center gap-1 text-neutral-500 transition-colors hover:text-secondary"
+          aria-label="Ir a la última página"
+        >
+          <span class="hidden sm:inline">Última</span>
+          <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      )}
+    </div>
+  )}
+</nav>

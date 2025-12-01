@@ -2,8 +2,12 @@
 import { actions } from "astro:actions";
 import Layout from "@layouts/Layout.astro";
 import Hero from "@components/home/Hero.astro";
+import AboutUs from "@components/home/AboutUs.astro";
+import MessageCard from "@components/home/MessageCard.astro";
 import LatestPost from "@components/home/LatestPost.astro";
 import Categories from "@components/home/Categories.astro";
+import Donations from "@components/home/Donations.astro";
+import Contact from "@components/home/Contact.astro";
 
 const { data } = await Astro.callAction(actions.post.getPostsByPage, {
   page: 1,
@@ -19,6 +23,10 @@ if (!data) {
   description="Activa el #ModoGuerra. El cuartel general para los compas de El Temach. Artículos y guías de desarrollo personal para forjar tu mejor versión. Sin pretextos, solo resultados."
 >
   <Hero />
+  <MessageCard />
+  <AboutUs />
   <LatestPost data={data} />
   <Categories />
+  <Donations />
+  <Contact />
 </Layout>
