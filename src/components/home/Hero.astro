@@ -8,10 +8,11 @@ import Link from "@components/link/Link.astro";
 ---
 
 <section class="relative flex items-center overflow-hidden min-h-screen py-20 md:py-0">
+  
   <!-- Fondo moderno y equilibrado -->
   <div class="absolute inset-0 overflow-hidden">
     <!-- Gradientes sutiles -->
-    <div class="absolute top-0 left-0 h-[800px] w-[800px] rounded-full bg-secondary/10 blur-3xl"></div>
+    <div class="absolute top-0 left-0 h-[700px] w-[800px] rounded-full bg-secondary/5 blur-3xl"></div>
     <div class="absolute bottom-0 right-0 h-[800px] w-[800px] rounded-full bg-accent/15 blur-3xl"></div>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-secondary/8 blur-3xl"></div>
     
@@ -25,9 +26,10 @@ import Link from "@components/link/Link.astro";
   </div>
 
   <!-- Contenido principal -->
-  <div class="container relative z-10 grid place-items-center gap-16 lg:grid-cols-2">
+  <div class="container relative z-10 grid place-items-center gap-10 lg:grid-cols-2">
     <!-- Columna izquierda: Contenido -->
     <div class="space-y-10">
+      
       <!-- Badge de estado discreto -->
       <div class="fade-in-up flex items-center gap-3">
         <div class="flex items-center gap-2 rounded-full border border-secondary/30 bg-complementary/50 px-3 py-1.5 backdrop-blur-sm">
@@ -49,7 +51,7 @@ import Link from "@components/link/Link.astro";
         <div class="flex items-center gap-3 mb-4">
           <div class="h-px flex-1 bg-gradient-to-r from-transparent to-secondary/30"></div>
           <Text className="text-xs font-bold text-secondary uppercase tracking-widest">
-            El Movimiento
+            La tribu
           </Text>
           <div class="h-px flex-1 bg-gradient-to-l from-transparent to-secondary/30"></div>
         </div>
@@ -83,32 +85,6 @@ import Link from "@components/link/Link.astro";
         </div>
       </div>
 
-      <!-- Métricas moderadas -->
-      <div class="slide-in-up grid grid-cols-3 gap-3 py-6">
-        <div class="group relative overflow-hidden rounded-xl border border-secondary/20 bg-gradient-to-br from-complementary/60 to-accent/10 p-3 backdrop-blur-sm transition-all duration-300 hover:border-secondary/40 hover:shadow-lg hover:shadow-secondary/20">
-          <div class="absolute inset-0 bg-secondary/5 opacity-0 transition-opacity group-hover:opacity-100"></div>
-          <div class="relative">
-            <Text className="text-2xl md:text-3xl font-bold text-secondary">500+</Text>
-            <Text className="text-xs text-neutral-500 uppercase tracking-wider">Artículos</Text>
-          </div>
-        </div>
-
-        <div class="group relative overflow-hidden rounded-xl border border-secondary/20 bg-gradient-to-br from-complementary/60 to-accent/10 p-3 backdrop-blur-sm transition-all duration-300 hover:border-secondary/40 hover:shadow-lg hover:shadow-secondary/20">
-          <div class="absolute inset-0 bg-secondary/5 opacity-0 transition-opacity group-hover:opacity-100"></div>
-          <div class="relative">
-            <Text className="text-2xl md:text-3xl font-bold text-secondary">10k+</Text>
-            <Text className="text-xs text-neutral-500 uppercase tracking-wider">Compas</Text>
-          </div>
-        </div>
-
-        <div class="group relative overflow-hidden rounded-xl border border-secondary/20 bg-gradient-to-br from-complementary/60 to-accent/10 p-3 backdrop-blur-sm transition-all duration-300 hover:border-secondary/40 hover:shadow-lg hover:shadow-secondary/20">
-          <div class="absolute inset-0 bg-secondary/5 opacity-0 transition-opacity group-hover:opacity-100"></div>
-          <div class="relative">
-            <Text className="text-2xl md:text-3xl font-bold text-secondary">24/7</Text>
-            <Text className="text-xs text-neutral-500 uppercase tracking-wider">Activo</Text>
-          </div>
-        </div>
-      </div>
 
       <!-- CTAs modernos -->
       <div class="slide-in-left flex flex-col gap-4 sm:flex-row">
@@ -120,7 +96,7 @@ import Link from "@components/link/Link.astro";
             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
             </svg>
-            Activar Modo Guerra
+            Activar Tu Modo Guerra
             <ArrowRight class="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Button>
         </Link>
@@ -137,24 +113,53 @@ import Link from "@components/link/Link.astro";
 
     </div>
 
-    <!-- Columna derecha: Imagen moderna -->
+    <!-- Columna derecha: Imagen con animación idle y hover -->
     <div class="slide-in-right relative flex items-center justify-center">
-      <div class="relative">
-        <!-- Círculo sutil -->
-        <div class="absolute inset-0 -m-16 rounded-full border border-secondary/10"></div>
+      <div class="relative image-hover-container group">
+        <!-- Anillos sutiles que se expanden al hover -->
+        <div class="absolute inset-0 -m-6 rounded-full border border-secondary/0 group-hover:border-secondary/30 transition-all duration-500 group-hover:scale-105 hover-ring-1"></div>
+        <div class="absolute inset-0 -m-10 rounded-full border border-secondary/0 group-hover:border-secondary/20 transition-all duration-700 group-hover:scale-110 hover-ring-2"></div>
         
-        <!-- Imagen principal -->
-        <div class="relative">
+        <!-- Imagen principal con animación idle -->
+        <div class="relative overflow-hidden rounded-full transition-all duration-400 group-hover:scale-103 image-wrapper image-idle-float">
           <Image
-            src="/avatars/eltemach.jpg"
+            src="/images/Temach.webp"
             alt="El Temach - Modo Guerra"
             width={450}
             height={450}
-            class="relative z-10 drop-shadow-xl rounded-full"
+            class="relative z-10 rounded-full transition-all duration-400 group-hover:brightness-105"
             loading="eager"
           />
-          <!-- Resplandor sutil -->
-          <div class="absolute -inset-4 bg-gradient-to-r from-secondary/10 to-accent/10 blur-2xl"></div>
+          
+          <!-- Resplandor que pulsa suavemente y se intensifica al hover -->
+          <div class="absolute -inset-6 bg-gradient-to-r from-secondary/10 via-accent/10 to-secondary/10 blur-2xl transition-all duration-400 group-hover:from-secondary/20 group-hover:via-accent/20 group-hover:to-secondary/20 idle-glow"></div>
+          
+          <!-- Overlay de brillo al hover -->
+          <div class="absolute inset-0 bg-gradient-to-br from-secondary/0 via-transparent to-accent/0 opacity-0 group-hover:opacity-20 transition-opacity duration-400 rounded-full hover-overlay"></div>
+          
+          <!-- Efecto de destello al hover -->
+          <div class="absolute inset-0 overflow-hidden rounded-full">
+            <div class="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-800 shine-effect"></div>
+          </div>
+        </div>
+
+        <!-- Partículas más pequeñas al hover -->
+        <div class="absolute inset-0 pointer-events-none">
+          <div class="particle-hover particle-hover-1 opacity-0 group-hover:opacity-100"></div>
+          <div class="particle-hover particle-hover-2 opacity-0 group-hover:opacity-100"></div>
+          <div class="particle-hover particle-hover-3 opacity-0 group-hover:opacity-100"></div>
+        </div>
+
+        <!-- Puntos rojos que emergen desde la parte inferior -->
+        <div class="absolute inset-10 pointer-events-none">
+          <div class="rising-particle rising-particle-1"></div>
+          <div class="rising-particle rising-particle-2"></div>
+          <div class="rising-particle rising-particle-3"></div>
+          <div class="rising-particle rising-particle-4"></div>
+          <div class="rising-particle rising-particle-5"></div>
+          <div class="rising-particle rising-particle-6"></div>
+          <div class="rising-particle rising-particle-7"></div>
+          <div class="rising-particle rising-particle-8"></div>
         </div>
       </div>
     </div>
@@ -253,5 +258,242 @@ import Link from "@components/link/Link.astro";
   /* Efecto hover en título */
   h1 span:hover {
     animation: intense-glow 1s ease-in-out infinite;
+  }
+
+  /* ===== ANIMACIÓN IDLE (Estado Normal) ===== */
+  
+  /* Flotación suave continua */
+  @keyframes idle-float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  .image-idle-float {
+    animation: idle-float 4s ease-in-out infinite;
+  }
+
+  /* Pulso suave del resplandor en idle */
+  @keyframes idle-glow-pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+  }
+
+  .idle-glow {
+    animation: idle-glow-pulse 3s ease-in-out infinite;
+  }
+
+  /* ===== EFECTOS HOVER (Reducidos) ===== */
+  
+  /* Imagen con sombra base */
+  .image-wrapper {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease;
+  }
+
+  .image-hover-container:hover .image-wrapper {
+    box-shadow: 
+      0 15px 40px rgba(240, 4, 4, 0.3),
+      0 0 50px rgba(240, 4, 4, 0.15),
+      0 20px 60px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Escala reducida al hover */
+  .scale-103 {
+    transform: scale(1.03);
+  }
+
+  /* Anillos que se expanden con delay */
+  .hover-ring-1 {
+    transition-delay: 0s;
+  }
+
+  .hover-ring-2 {
+    transition-delay: 0.15s;
+  }
+
+  /* Efecto de destello que cruza (más rápido y sutil) */
+  .shine-effect {
+    transform: translateX(-100%) skewX(-10deg);
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .image-hover-container:hover .shine-effect {
+    transform: translateX(100%) skewX(-10deg);
+  }
+
+  /* Partículas más pequeñas que aparecen al hover */
+  @keyframes particle-burst {
+    0% {
+      transform: translate(0, 0) scale(0);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--tx), var(--ty)) scale(1);
+      opacity: 0;
+    }
+  }
+
+  .particle-hover {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, #f00404 0%, #c62828 50%, transparent 70%);
+    border-radius: 50%;
+    transition: opacity 0.3s ease;
+  }
+
+  .particle-hover-1 {
+    top: 25%;
+    left: 25%;
+    --tx: -25px;
+    --ty: -25px;
+  }
+
+  .particle-hover-2 {
+    top: 25%;
+    right: 25%;
+    --tx: 25px;
+    --ty: -25px;
+  }
+
+  .particle-hover-3 {
+    bottom: 25%;
+    left: 50%;
+    --tx: 0px;
+    --ty: 30px;
+  }
+
+  .image-hover-container:hover .particle-hover-1 {
+    animation: particle-burst 0.6s ease-out forwards;
+    animation-delay: 0s;
+  }
+
+  .image-hover-container:hover .particle-hover-2 {
+    animation: particle-burst 0.6s ease-out forwards;
+    animation-delay: 0.1s;
+  }
+
+  .image-hover-container:hover .particle-hover-3 {
+    animation: particle-burst 0.6s ease-out forwards;
+    animation-delay: 0.2s;
+  }
+
+  /* Overlay con gradiente que aparece */
+  .hover-overlay {
+    mix-blend-mode: overlay;
+  }
+
+  /* Transición suave del contenedor */
+  .image-hover-container {
+    transition: transform 0.4s ease;
+  }
+
+  /* Elevación sutil al hacer hover */
+  .image-hover-container:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Detener animación idle al hacer hover */
+  .image-hover-container:hover .image-idle-float {
+    animation-play-state: paused;
+  }
+
+  /* ===== PARTÍCULAS ROJAS INTENSAS DESDE LAS ORILLAS ===== */
+  
+  /* Animación de ascenso de partículas */
+  @keyframes rise-from-bottom {
+    0% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.9;
+    }
+    50% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(-120px) translateX(var(--drift)) scale(0.3);
+      opacity: 0;
+    }
+  }
+
+  .rising-particle {
+    position: absolute;
+    bottom: 0;
+    width: 5px;
+    height: 5px;
+    background: radial-gradient(circle, #ff0000 0%, #f00404 30%, #ff1a1a 50%, transparent 70%);
+    border-radius: 50%;
+    box-shadow: 
+      0 0 10px rgba(255, 0, 0, 0.9),
+      0 0 20px rgba(240, 4, 4, 0.6),
+      0 0 30px rgba(240, 4, 4, 0.3);
+    animation: rise-from-bottom 4s ease-in infinite;
+  }
+
+  /* Posiciones en las ORILLAS (izquierda y derecha) con delays */
+  .rising-particle-1 {
+    left: 8%;
+    --drift: -5px;
+    animation-delay: 0s;
+  }
+
+  .rising-particle-2 {
+    left: 92%;
+    --drift: 5px;
+    animation-delay: 0.5s;
+  }
+
+  .rising-particle-3 {
+    left: 12%;
+    --drift: -8px;
+    animation-delay: 1s;
+  }
+
+  .rising-particle-4 {
+    left: 88%;
+    --drift: 8px;
+    animation-delay: 1.5s;
+  }
+
+  .rising-particle-5 {
+    left: 15%;
+    --drift: -6px;
+    animation-delay: 2s;
+  }
+
+  .rising-particle-6 {
+    left: 85%;
+    --drift: 6px;
+    animation-delay: 2.5s;
+  }
+
+  .rising-particle-7 {
+    left: 10%;
+    --drift: -10px;
+    animation-delay: 3s;
+  }
+
+  .rising-particle-8 {
+    left: 90%;
+    --drift: 10px;
+    animation-delay: 3.5s;
   }
 </style>
