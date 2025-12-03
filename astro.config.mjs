@@ -14,6 +14,18 @@ export default defineConfig({
 
   env: {
     schema: {
+      DATABASE_URL: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      DISCORD_CLIENT_ID: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      DISCORD_CLIENT_SECRET: envField.string({
+        context: "server",
+        access: "secret",
+      }),
       CLOUDINARY_CLOUDNAME: envField.string({
         context: "server",
         access: "secret",
