@@ -1,16 +1,30 @@
-import prisma from "../src/lib/prisma.ts";
+import "dotenv/config";
+import { PrismaClient } from "../prisma/generated/client.ts";
+import { PrismaPg } from "@prisma/adapter-pg";
+
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL!,
+});
+
+const prisma = new PrismaClient({
+  adapter,
+});
+
 import { categories } from "./seed-categories.ts";
 import { posts } from "./seed-posts.ts";
 import { users } from "./seed-users.ts";
 
 async function main() {
-  await prisma.category.deleteMany();
-  await prisma.category.createMany({ data: categories });
-
-  await prisma.user.deleteMany();
-  await prisma.user.createMany({ data: users });
-
+  // Delete in order to respect foreign key constraints
+  await prisma.comment.deleteMany();
+  await prisma.like.deleteMany();
   await prisma.post.deleteMany();
+  await prisma.user.deleteMany();
+  await prisma.category.deleteMany();
+
+  // Create in order
+  await prisma.category.createMany({ data: categories });
+  await prisma.user.createMany({ data: users });
   await prisma.post.createMany({
     data: posts.map(({ categories, ...rest }) => rest),
   });

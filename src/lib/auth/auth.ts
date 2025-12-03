@@ -1,9 +1,8 @@
 import { betterAuth } from "better-auth";
-import { PrismaClient } from "@prisma/client";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { admin } from "better-auth/plugins";
-
-const prisma = new PrismaClient();
+import prisma from "../prisma";
+import { DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET } from "astro:env/server";
 
 export const auth = betterAuth({
   appName: "Devtalles Community Blog",
@@ -13,8 +12,8 @@ export const auth = betterAuth({
 
   socialProviders: {
     discord: {
-      clientId: process.env.DISCORD_CLIENT_ID as string,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
+      clientId: DISCORD_CLIENT_ID as string,
+      clientSecret: DISCORD_CLIENT_SECRET as string,
     },
   },
 
@@ -31,5 +30,5 @@ export const auth = betterAuth({
     updateAge: 60 * 60 * 24, // 1 day (every 1 day the session expiration is updated)
   },
 
-  trustedOrigins: ["http://localhost:4321"],
+  trustedOrigins: ["http://localhost:4321", "https://www.modoguerra.com"],
 });
